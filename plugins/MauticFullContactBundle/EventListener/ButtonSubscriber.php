@@ -13,32 +13,14 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ButtonSubscriber implements EventSubscriberInterface
 {
-    /**
-     * @var IntegrationHelper
-     */
-    private $helper;
-
-    /**
-     * @var TranslatorInterface
-     */
-    private $translator;
-
-    /**
-     * @var RouterInterface
-     */
-    private $router;
-
     public function __construct(
-        IntegrationHelper $helper,
-        TranslatorInterface $translator,
-        RouterInterface $router
+        private IntegrationHelper $helper,
+        private TranslatorInterface $translator,
+        private RouterInterface $router
     ) {
-        $this->helper     = $helper;
-        $this->translator = $translator;
-        $this->router     = $router;
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             CoreEvents::VIEW_INJECT_CUSTOM_BUTTONS => ['injectViewButtons', 0],
@@ -59,7 +41,7 @@ class ButtonSubscriber implements EventSubscriberInterface
             $event->addButton(
                 [
                     'attr' => [
-                        'class'       => 'btn btn-default btn-sm btn-nospin',
+                        'class'       => 'btn btn-ghost btn-sm btn-nospin',
                         'data-toggle' => 'ajaxmodal',
                         'data-target' => '#MauticSharedModal',
                         'onclick'     => 'this.href=\''.
@@ -71,7 +53,7 @@ class ButtonSubscriber implements EventSubscriberInterface
                         'data-header' => $this->translator->trans('mautic.plugin.fullcontact.button.caption'),
                     ],
                     'btnText'   => $this->translator->trans('mautic.plugin.fullcontact.button.caption'),
-                    'iconClass' => 'fa fa-search',
+                    'iconClass' => 'ri-search-line',
                 ],
                 ButtonHelper::LOCATION_BULK_ACTIONS
             );
@@ -91,7 +73,7 @@ class ButtonSubscriber implements EventSubscriberInterface
                         ),
                     ],
                     'btnText'   => $this->translator->trans('mautic.plugin.fullcontact.button.caption'),
-                    'iconClass' => 'fa fa-search',
+                    'iconClass' => 'ri-search-line',
                 ];
 
                 $event
@@ -111,7 +93,7 @@ class ButtonSubscriber implements EventSubscriberInterface
                 $event->addButton(
                     [
                         'attr' => [
-                            'class'       => 'btn btn-default btn-sm btn-nospin',
+                            'class'       => 'btn btn-ghost btn-sm btn-nospin',
                             'data-toggle' => 'ajaxmodal',
                             'data-target' => '#MauticSharedModal',
                             'onclick'     => 'this.href=\''.
@@ -125,7 +107,7 @@ class ButtonSubscriber implements EventSubscriberInterface
                             ),
                         ],
                         'btnText'   => $this->translator->trans('mautic.plugin.fullcontact.button.caption'),
-                        'iconClass' => 'fa fa-search',
+                        'iconClass' => 'ri-search-line',
                     ],
                     ButtonHelper::LOCATION_BULK_ACTIONS
                 );
@@ -145,7 +127,7 @@ class ButtonSubscriber implements EventSubscriberInterface
                             ),
                         ],
                         'btnText'   => $this->translator->trans('mautic.plugin.fullcontact.button.caption'),
-                        'iconClass' => 'fa fa-search',
+                        'iconClass' => 'ri-search-line',
                     ];
 
                     $event

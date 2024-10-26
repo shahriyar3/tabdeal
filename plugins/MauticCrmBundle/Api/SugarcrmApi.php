@@ -3,7 +3,11 @@
 namespace MauticPlugin\MauticCrmBundle\Api;
 
 use Mautic\PluginBundle\Exception\ApiErrorException;
+use MauticPlugin\MauticCrmBundle\Integration\SugarcrmIntegration;
 
+/**
+ * @property SugarcrmIntegration $integration
+ */
 class SugarcrmApi extends CrmApi
 {
     protected $object = 'Leads';
@@ -104,7 +108,7 @@ class SugarcrmApi extends CrmApi
     /**
      * @return array
      *
-     * @throws \Mautic\PluginBundle\Exception\ApiErrorException
+     * @throws ApiErrorException
      */
     public function createLead(array $fields, $lead)
     {
@@ -192,7 +196,7 @@ class SugarcrmApi extends CrmApi
     /**
      * @return array
      *
-     * @throws \Mautic\PluginBundle\Exception\ApiErrorException
+     * @throws ApiErrorException
      */
     public function syncLeadsToSugar(array $data)
     {
@@ -216,9 +220,9 @@ class SugarcrmApi extends CrmApi
                         }
                         if (isset($resp['ids'])) {
                             $result = ['reference_id' => $fields['reference_id'],
-                                       'id'           => $resp['ids'][$k],
-                                       'new'          => !isset($fields['id']),
-                                       'ko'           => false, ];
+                                'id'                  => $resp['ids'][$k],
+                                'new'                 => !isset($fields['id']),
+                                'ko'                  => false, ];
                         }
                         if (isset($resp['error'])) {
                             $result['ko']    = true;
@@ -281,9 +285,9 @@ class SugarcrmApi extends CrmApi
                                 'error'     => $leadFields['error'].' '.$leadFields['error_message'], ];
                         } else {
                             $result = ['reference_id' => $all_ids[$k]['reference_id'],
-                                    'id'              => $fields['id'],
-                                    'new'             => !isset($all_ids[$k]['id']),
-                                    'ko'              => false, ];
+                                'id'                  => $fields['id'],
+                                'new'                 => !isset($all_ids[$k]['id']),
+                                'ko'                  => false, ];
                             if (isset($all_ids[$k]['id']) && $fields['id'] != $all_ids[$k]['id']) {
                                 $result['ko']    = true;
                                 $result['error'] = 'Returned ID does not correspond to input id';
@@ -300,7 +304,7 @@ class SugarcrmApi extends CrmApi
 
     /**
      * @param $object
-     *                 TODO 7.x
+     *                TODO 7.x
      *
      * @return array|mixed|string
      */
@@ -345,8 +349,8 @@ class SugarcrmApi extends CrmApi
             }
 
             $parameters = [
-                    'name_value_lists' => $set_name_value_lists,
-                ];
+                'name_value_lists' => $set_name_value_lists,
+            ];
             if ('6' == $tokenData['version']) {
                 $resp = $this->request('set_entries', $parameters, 'POST', 'mtc_WebActivities');
             } else {
@@ -442,16 +446,16 @@ class SugarcrmApi extends CrmApi
             $fields = ['id', 'email1'];
 
             $parameters = [
-                     'query'                    => $q,
-                     'order_by'                 => '',
-                     'offset'                   => 0,
-                    'select_fields'             => $fields,
-                    'link_name_to_fields_array' => [/* TO BE MODIFIED */
-                    ],
-                    'max_results' => 1000,
-                    'deleted'     => 0,
-                    'favorites'   => false,
-                ];
+                'query'                     => $q,
+                'order_by'                  => '',
+                'offset'                    => 0,
+                'select_fields'             => $fields,
+                'link_name_to_fields_array' => [/* TO BE MODIFIED */
+                ],
+                'max_results' => 1000,
+                'deleted'     => 0,
+                'favorites'   => false,
+            ];
             $data = $this->request('get_entry_list', $parameters, 'GET', 'Users');
 
             if (isset($query['type']) && 'BYEMAIL' == $query['type']) {
@@ -494,8 +498,8 @@ class SugarcrmApi extends CrmApi
             $fields = ['id', 'email1', 'email'];
 
             $parameters = [
-                    'filter' => [['$and' => $filter]],
-                    'offset' => 0,
+                'filter'     => [['$and' => $filter]],
+                'offset'     => 0,
                 'fields'     => implode(',', $fields),
                 'max_num'    => 1000,
                 // 'deleted'     => 0,
@@ -616,9 +620,9 @@ class SugarcrmApi extends CrmApi
                     $fields[] = 'account_id';
                 }
                 $parameters = [
-                     'query'                    => $q,
-                     'order_by'                 => '',
-                     'offset'                   => $query['offset'],
+                    'query'                     => $q,
+                    'order_by'                  => '',
+                    'offset'                    => $query['offset'],
                     'select_fields'             => $fields,
                     'link_name_to_fields_array' => [/* TO BE MODIFIED */
                         [
@@ -679,9 +683,9 @@ class SugarcrmApi extends CrmApi
                 // $filter_args = ['filter' => [['$and' => $filter]]];
                 // $fields_arg  = implode(',', $fields);
                 $parameters = [
-//                     'order_by'                 => '',
-                     'filter' => [['$and' => $filter]],
-                     'offset' => $query['offset'],
+                    //                     'order_by'                 => '',
+                    'filter'  => [['$and' => $filter]],
+                    'offset'  => $query['offset'],
                     'fields'  => implode(',', $fields),
                     'max_num' => $query['max_results'],
                     // 'deleted'     => 0,

@@ -8,6 +8,9 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
+/**
+ * @extends AbstractType<array<mixed>>
+ */
 class TwitterType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -42,7 +45,7 @@ class TwitterType extends AbstractType
             'attr'       => [
                 'class'       => 'form-control',
                 'placeholder' => 'mautic.integration.Twitter.share.username',
-                'preaddon'    => 'fa fa-at',
+                'preaddon'    => 'ri-at-line',
             ],
         ]);
 
@@ -53,7 +56,7 @@ class TwitterType extends AbstractType
             'attr'       => [
                 'class'       => 'form-control',
                 'placeholder' => 'mautic.integration.Twitter.share.username',
-                'preaddon'    => 'fa fa-at',
+                'preaddon'    => 'ri-at-line',
             ],
         ]);
 

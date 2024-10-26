@@ -36,7 +36,7 @@ class GrapesJsBuilder
 
         $builder->createManyToOne(
             'email',
-            \Mautic\EmailBundle\Entity\Email::class
+            Email::class
         )->addJoinColumn('email_id', 'id', true, false, 'CASCADE')->build();
     }
 
@@ -69,7 +69,7 @@ class GrapesJsBuilder
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getCustomMjml()
     {

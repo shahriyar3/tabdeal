@@ -9,16 +9,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
+/**
+ * @extends AbstractType<array<mixed>>
+ */
 class TweetSendType extends AbstractType
 {
-    /**
-     * @var RouterInterface
-     */
-    protected $router;
-
-    public function __construct(RouterInterface $router)
-    {
-        $this->router = $router;
+    public function __construct(
+        protected RouterInterface $router
+    ) {
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -63,7 +61,7 @@ class TweetSendType extends AbstractType
                         'onclick' => 'Mautic.loadNewWindow({
                         "windowUrl": "'.$windowUrl.'"
                     })',
-                        'icon' => 'fa fa-plus',
+                        'icon' => 'ri-add-line',
                     ],
                     'label' => 'mautic.integration.Twitter.new.tweet',
                 ]
@@ -91,7 +89,7 @@ class TweetSendType extends AbstractType
             //             'class'    => 'btn btn-primary btn-nospin',
             //             'onclick'  => 'Mautic.loadNewWindow(Mautic.standardTweetUrl({"windowUrl": "'.$windowUrlEdit.'"}))',
             //             'disabled' => !isset($tweet),
-            //             'icon'     => 'fa fa-edit',
+            //             'icon'     => 'ri-edit-line',
             //         ],
             //         'label' => 'mautic.integration.Twitter.edit.tweet',
             //     ]

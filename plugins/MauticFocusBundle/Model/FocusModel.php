@@ -32,43 +32,19 @@ use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\EventDispatcher\Event;
 use Twig\Environment;
+use Twig\Runtime\EscaperRuntime;
 
 /**
  * @extends FormModel<Focus>
  */
 class FocusModel extends FormModel
 {
-    /**
-     * @var \Mautic\FormBundle\Model\FormModel
-     */
-    protected $formModel;
-
-    /**
-     * @var TrackableModel
-     */
-    protected $trackableModel;
-
-    /**
-     * @var Environment
-     */
-    protected $twig;
-
-    /**
-     * @var FieldModel
-     */
-    protected $leadFieldModel;
-
-    /**
-     * @var ContactTracker
-     */
-    protected $contactTracker;
-
     public function __construct(
-        \Mautic\FormBundle\Model\FormModel $formModel,
-        TrackableModel $trackableModel,
-        Environment $twig,
-        FieldModel $leadFieldModel,
-        ContactTracker $contactTracker,
+        protected \Mautic\FormBundle\Model\FormModel $formModel,
+        protected TrackableModel $trackableModel,
+        protected Environment $twig,
+        protected FieldModel $leadFieldModel,
+        protected ContactTracker $contactTracker,
         EntityManagerInterface $em,
         CorePermissions $security,
         EventDispatcherInterface $dispatcher,
@@ -78,42 +54,29 @@ class FocusModel extends FormModel
         LoggerInterface $mauticLogger,
         CoreParametersHelper $coreParametersHelper
     ) {
-        $this->formModel      = $formModel;
-        $this->trackableModel = $trackableModel;
-        $this->twig           = $twig;
         $this->dispatcher     = $dispatcher;
-        $this->leadFieldModel = $leadFieldModel;
-        $this->contactTracker = $contactTracker;
 
         parent::__construct($em, $security, $dispatcher, $router, $translator, $userHelper, $mauticLogger, $coreParametersHelper);
     }
 
-    /**
-     * @return string
-     */
-    public function getActionRouteBase()
+    public function getActionRouteBase(): string
     {
         return 'focus';
     }
 
-    /**
-     * @return string
-     */
-    public function getPermissionBase()
+    public function getPermissionBase(): string
     {
         return 'focus:items';
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param object      $entity
      * @param string|null $action
      * @param array       $options
      *
      * @throws NotFoundHttpException
      */
-    public function createForm($entity, FormFactoryInterface $formFactory, $action = null, $options = [])
+    public function createForm($entity, FormFactoryInterface $formFactory, $action = null, $options = []): \Symfony\Component\Form\FormInterface
     {
         if (!$entity instanceof Focus) {
             throw new MethodNotAllowedHttpException(['Focus']);
@@ -127,33 +90,25 @@ class FocusModel extends FormModel
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \MauticPlugin\MauticFocusBundle\Entity\FocusRepository
      */
     public function getRepository()
     {
-        return $this->em->getRepository(\MauticPlugin\MauticFocusBundle\Entity\Focus::class);
+        return $this->em->getRepository(Focus::class);
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \MauticPlugin\MauticFocusBundle\Entity\StatRepository
      */
     public function getStatRepository()
     {
-        return $this->em->getRepository(\MauticPlugin\MauticFocusBundle\Entity\Stat::class);
+        return $this->em->getRepository(Stat::class);
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param int|null $id
-     *
-     * @return Focus|null
      */
-    public function getEntity($id = null)
+    public function getEntity($id = null): ?Focus
     {
         if (null === $id) {
             return new Focus();
@@ -163,8 +118,6 @@ class FocusModel extends FormModel
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param Focus      $entity
      * @param bool|false $unlock
      */
@@ -228,7 +181,7 @@ class FocusModel extends FormModel
             $focusContent .= $cached['form'];
         }
 
-        $focusContent = twig_escape_filter($this->twig, $focusContent, 'js');
+        $focusContent = $this->twig->getRuntime(EscaperRuntime::class)->escape($focusContent, 'js');
 
         return str_replace('{focus_content}', $focusContent, $cached['js']);
     }
@@ -369,7 +322,7 @@ class FocusModel extends FormModel
     }
 
     /**
-     * @throws \Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException
+     * @throws MethodNotAllowedHttpException
      */
     protected function dispatchEvent($action, &$entity, $isNew = false, Event $event = null): ?Event
     {
@@ -409,17 +362,14 @@ class FocusModel extends FormModel
     }
 
     /**
-     * @param null $dateFormat
      * @param bool $canViewOthers
-     *
-     * @return array
      */
-    public function getStats(Focus $focus, $unit, \DateTime $dateFrom = null, \DateTime $dateTo = null, $dateFormat = null, $canViewOthers = true)
+    public function getStats(Focus $focus, $unit, \DateTime $dateFrom, \DateTime $dateTo, $dateFormat = null, $canViewOthers = true): array
     {
         $chart = new LineChart($unit, $dateFrom, $dateTo, $dateFormat);
         $query = new ChartQuery($this->em->getConnection(), $dateFrom, $dateTo, $unit);
 
-        $q = $query->prepareTimeDataQuery('focus_stats', 'date_added', ['focus_id' => $focus->getId()]);
+        $q = $query->prepareTimeDataQuery('focus_stats', 'date_added', ['type' => Stat::TYPE_NOTIFICATION, 'focus_id' => $focus->getId()]);
         if (!$canViewOthers) {
             $this->limitQueryToCreator($q);
         }
