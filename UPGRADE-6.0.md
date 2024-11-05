@@ -99,3 +99,10 @@ class NeedsSession
     }
 }
 ```
+
+    - The `lightsaml/sp-bundle` package was replaced with a maintained fork `lightsaml2/sp-bundle`
+- `Mautic\PageBundle\Form\Type\PagePublishDatesType` was removed.
+- `getSessionName` was removed from `Mautic\PageBundle\Helper\TrackingHelper` No session for anonymous users. Use `getCacheKey`.
+- `getSession` was removed from `Mautic\PageBundle\Helper\TrackingHelper` No session for anonymous users. Use `getCacheItem`.
+- `updateSession` was removed from `Mautic\PageBundle\Helper\TrackingHelper` No session for anonymous users. Use `updateCacheItem`.
+- `getNewVsReturningPieChartData` was removed from `Mautic\PageBundle\Model\PageModel`. Use `getUniqueVsReturningPieChartData()` instead.
