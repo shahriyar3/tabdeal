@@ -40,7 +40,7 @@ class PublicController extends FormController
             return new Response('ERROR');
         }
 
-        $result           = json_decode($request->request->get('result') ?? [], true);
+        $result           = json_decode($request->request->all()['result'] ?? [], true);
         $oid              = $request->request->get('webhookId', '');
         $validatedRequest = $lookupHelper->validateRequest($oid);
 
@@ -216,7 +216,7 @@ class PublicController extends FormController
                                 $ex->getMessage()
                             ),
                             'FullContact Plugin',
-                            'fa-exclamation',
+                            'ri-error-warning-line',
                             $user
                         );
                     }
@@ -373,7 +373,7 @@ class PublicController extends FormController
                                 $ex->getMessage()
                             ),
                             'FullContact Plugin',
-                            'fa-exclamation',
+                            'ri-error-warning-line',
                             $user
                         );
                     }
