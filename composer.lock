@@ -4116,6 +4116,199 @@
             "time": "2016-06-10T07:21:52+00:00"
         },
         {
+            "name": "javer/lightsaml",
+            "version": "v1.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/javer/lightSAML.git",
+                "reference": "fbae033c52a5bb08f0eb0043b0f72de76b98a890"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/javer/lightSAML/zipball/fbae033c52a5bb08f0eb0043b0f72de76b98a890",
+                "reference": "fbae033c52a5bb08f0eb0043b0f72de76b98a890",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1",
+                "robrichards/xmlseclibs": "^3.0",
+                "symfony/event-dispatcher": "^5.4 || ^6.0 || ^7.0",
+                "symfony/http-foundation": "^5.4 || ^6.0 || ^7.0"
+            },
+            "require-dev": {
+                "monolog/monolog": "^2.0 || ^3.0",
+                "phpunit/phpunit": "^9.5",
+                "pimple/pimple": "~3.0",
+                "symfony/css-selector": "^5.4 || ^6.0 || ^7.0",
+                "symfony/dom-crawler": "^5.4 || ^6.0 || ^7.0"
+            },
+            "suggest": {
+                "lightsaml/sp-bundle": "Symfony 2 SP security bundle",
+                "lightsaml/symfony-bridge": "Symfony 2 build container bridge"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "LightSaml\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Milos Tomic",
+                    "email": "tmilos@gmail.com",
+                    "homepage": "https://github.com/tmilos/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Light SAML 2.0 PHP library",
+            "homepage": "https://www.lightsaml.com/",
+            "keywords": [
+                "SAML 2.0",
+                "Single Logout",
+                "Single SignOn",
+                "library",
+                "lightSAML",
+                "php"
+            ],
+            "support": {
+                "docs": "http://www.lightsaml.com/LightSAML-Core/",
+                "issues": "https://github.com/lightsaml/lightsaml/issues",
+                "source": "https://github.com/lightSAML/lightSAML"
+            },
+            "time": "2024-01-09T14:17:08+00:00"
+        },
+        {
+            "name": "javer/sp-bundle",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/javer/SpBundle.git",
+                "reference": "1c90c5ba9e64396c47dc1ea1c492b675f0469768"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/javer/SpBundle/zipball/1c90c5ba9e64396c47dc1ea1c492b675f0469768",
+                "reference": "1c90c5ba9e64396c47dc1ea1c492b675f0469768",
+                "shasum": ""
+            },
+            "require": {
+                "javer/symfony-bridge": "^1.5",
+                "php": ">=8.1",
+                "symfony/framework-bundle": "^6.0 || ^7.0",
+                "symfony/security-bundle": "^6.0 || ^7.0"
+            },
+            "require-dev": {
+                "ext-simplexml": "*",
+                "phpunit/phpunit": "^9.5",
+                "symfony/browser-kit": "^6.0 || ^7.0",
+                "symfony/css-selector": "^6.0 || ^7.0",
+                "symfony/monolog-bundle": "^3.0 || ^4.0",
+                "symfony/twig-bundle": "^6.0 || ^7.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "LightSaml\\SpBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Milos Tomic",
+                    "email": "tmilos@gmail.com",
+                    "homepage": "http://github.com/tmilos",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Vadim Borodavko",
+                    "email": "vaidm.borodavko@gmail.com",
+                    "homepage": "https://github.com/javer",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Light SAML2 SP Symfony Bundle",
+            "homepage": "http://www.lightsaml.com/SP-Bundle/",
+            "support": {
+                "source": "https://github.com/javer/SpBundle/tree/2.1.0"
+            },
+            "time": "2024-01-09T17:15:53+00:00"
+        },
+        {
+            "name": "javer/symfony-bridge",
+            "version": "1.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/javer/SymfonyBridgeBundle.git",
+                "reference": "9d65dc277278b19ba29c7589ddb1f01d59603ed5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/javer/SymfonyBridgeBundle/zipball/9d65dc277278b19ba29c7589ddb1f01d59603ed5",
+                "reference": "9d65dc277278b19ba29c7589ddb1f01d59603ed5",
+                "shasum": ""
+            },
+            "require": {
+                "javer/lightsaml": "^1.7",
+                "php": ">=8.1",
+                "symfony/dependency-injection": "^5.4 || ^6.0 || ^7.0",
+                "symfony/framework-bundle": "^5.4 || ^6.0 || ^7.0",
+                "symfony/yaml": "^5.4 || ^6.0 || ^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.5",
+                "symfony/browser-kit": "^5.4 || ^6.0 || ^7.0",
+                "symfony/filesystem": "^5.4 || ^6.0 || ^7.0",
+                "symfony/finder": "^5.4 || ^6.0 || ^7.0",
+                "symfony/routing": "^5.4 || ^6.0 || ^7.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "LightSaml\\SymfonyBridgeBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Milos Tomic",
+                    "email": "tmilos@gmail.com",
+                    "homepage": "http://github.com/tmilos",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Light SAML Symfony bridge bundle",
+            "homepage": "http://www.lightsaml.com",
+            "support": {
+                "source": "https://github.com/javer/SymfonyBridgeBundle/tree/1.6.0"
+            },
+            "time": "2024-01-09T14:34:34+00:00"
+        },
+        {
             "name": "jbroadway/urlify",
             "version": "1.2.4-stable",
             "source": {
@@ -5352,182 +5545,6 @@
             "time": "2024-01-28T23:22:08+00:00"
         },
         {
-            "name": "lightsaml2/lightsaml",
-            "version": "2.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/lightsaml2/lightSAML.git",
-                "reference": "4ac1e033bcd47871ea5059ef7de28484eb544664"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/lightsaml2/lightSAML/zipball/4ac1e033bcd47871ea5059ef7de28484eb544664",
-                "reference": "4ac1e033bcd47871ea5059ef7de28484eb544664",
-                "shasum": ""
-            },
-            "require": {
-                "ext-dom": "*",
-                "ext-json": "*",
-                "php": "^7.2|^8.0",
-                "psr/log": "^1|^2|^3",
-                "robrichards/xmlseclibs": "^3.0",
-                "symfony/event-dispatcher": "^4.4|^5.4|^6.0",
-                "symfony/http-foundation": "^4.4|^5.4|^6.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^8.0|^9.0",
-                "pimple/pimple": "~3.0",
-                "symfony/css-selector": "^4.4|^5.4|^6.0",
-                "symfony/dom-crawler": "^4.4|^5.4|^6.0"
-            },
-            "suggest": {
-                "lightsaml2/sp-bundle": "Symfony SP security bundle",
-                "lightsaml2/symfony-bridge": "Symfony build container bridge"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "LightSaml\\": "src/",
-                    "LightSaml\\Tests\\": "tests/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Milos Tomic",
-                    "email": "tmilos@gmail.com",
-                    "homepage": "https://github.com/tmilos/",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Light SAML 2.0 PHP library",
-            "homepage": "https://www.lightsaml.com/",
-            "keywords": [
-                "SAML 2.0",
-                "Single Logout",
-                "Single SignOn",
-                "library",
-                "lightSAML",
-                "php"
-            ],
-            "support": {
-                "docs": "http://www.lightsaml.com/LightSAML-Core/",
-                "issues": "https://github.com/lightsaml2/lightsaml/issues",
-                "source": "https://github.com/lightSAML2/lightSAML"
-            },
-            "time": "2023-03-18T14:00:47+00:00"
-        },
-        {
-            "name": "lightsaml2/sp-bundle",
-            "version": "3.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/lightsaml2/SpBundle.git",
-                "reference": "76b679966f59fbeef646778db53c45c9dfdd7cb0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/lightsaml2/SpBundle/zipball/76b679966f59fbeef646778db53c45c9dfdd7cb0",
-                "reference": "76b679966f59fbeef646778db53c45c9dfdd7cb0",
-                "shasum": ""
-            },
-            "require": {
-                "lightsaml2/lightsaml": "^2.0",
-                "lightsaml2/symfony-bridge": "^3.0",
-                "php": "^7.4|^8.0",
-                "symfony/framework-bundle": "^5.4|^6.0",
-                "symfony/security-bundle": "^5.4|^6.0"
-            },
-            "require-dev": {
-                "ext-simplexml": "*",
-                "phpunit/phpunit": "^9.0",
-                "symfony/monolog-bundle": "^3.0",
-                "symfony/symfony": "^5.4|^6.0"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-0": {
-                    "LightSaml\\SpBundle\\": "src/",
-                    "LightSaml\\SpBundle\\Tests\\": "tests/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Milos Tomic",
-                    "email": "tmilos@gmail.com",
-                    "homepage": "http://github.com/tmilos",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Light SAML2 SP Symfony Bundle",
-            "homepage": "http://www.lightsaml.com/SP-Bundle/",
-            "support": {
-                "source": "https://github.com/lightsaml2/SpBundle/tree/3.0.3"
-            },
-            "time": "2022-06-19T18:20:11+00:00"
-        },
-        {
-            "name": "lightsaml2/symfony-bridge",
-            "version": "3.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/lightsaml2/SymfonyBridgeBundle.git",
-                "reference": "42b952bbc98d22229426f12cd63643a58b816c0a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/lightsaml2/SymfonyBridgeBundle/zipball/42b952bbc98d22229426f12cd63643a58b816c0a",
-                "reference": "42b952bbc98d22229426f12cd63643a58b816c0a",
-                "shasum": ""
-            },
-            "require": {
-                "lightsaml2/lightsaml": "^2.0",
-                "php": "^7.2|^8.0",
-                "symfony/dependency-injection": "^5.4|^6.0",
-                "symfony/framework-bundle": "^5.4|^6.0",
-                "symfony/yaml": "^5.4|^6.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^9.0",
-                "symfony/browser-kit": "^5.4|^6.0",
-                "symfony/filesystem": "^5.4|^6.0",
-                "symfony/finder": "^5.4|^6.0",
-                "symfony/routing": "^5.4|^6.0"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-0": {
-                    "LightSaml\\SymfonyBridgeBundle\\": "src/",
-                    "LightSaml\\SymfonyBridgeBundle\\Tests\\": "tests/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Milos Tomic",
-                    "email": "tmilos@gmail.com",
-                    "homepage": "http://github.com/tmilos",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Light SAML Symfony bridge bundle",
-            "homepage": "http://www.lightsaml.com",
-            "support": {
-                "source": "https://github.com/lightsaml2/SymfonyBridgeBundle/tree/3.0.0"
-            },
-            "time": "2022-01-01T16:23:15+00:00"
-        },
-        {
             "name": "maennchen/zipstream-php",
             "version": "2.4.0",
             "source": {
@@ -5993,7 +6010,7 @@
             "dist": {
                 "type": "path",
                 "url": "app",
-                "reference": "ff59784380da2583719ee56b51a9c92eae3423b5"
+                "reference": "f462ac4bf171c471833c99aa985cfcbbd6a8e96e"
             },
             "require": {
                 "aws/aws-sdk-php": "~3.0",
@@ -6026,6 +6043,7 @@
                 "guzzlehttp/oauth-subscriber": "^0.6.0",
                 "helios-ag/fm-elfinder-bundle": "^12.3",
                 "ip2location/ip2location-php": "^7.2",
+                "javer/sp-bundle": "^2.0",
                 "jbroadway/urlify": "^1.0",
                 "jms/serializer-bundle": "^5.4",
                 "joomla/filter": "~1.4.4",
@@ -6033,7 +6051,6 @@
                 "klapaudius/oauth-server-bundle": "^4.0.0",
                 "knplabs/gaufrette": "~0.9.0",
                 "knplabs/knp-menu-bundle": "^3.0",
-                "lightsaml2/sp-bundle": "^3.0.0",
                 "matomo/device-detector": "^4.0",
                 "matthiasmullie/minify": "^1.3",
                 "noxlogic/ratelimit-bundle": "^1.19",
@@ -19059,11 +19076,11 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
-    "platform": {},
-    "platform-dev": {},
+    "platform": [],
+    "platform-dev": [],
     "platform-overrides": {
         "php": "8.1.0"
     },
