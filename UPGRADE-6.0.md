@@ -31,6 +31,11 @@
 - Removed `Mautic\PageBundle\Entity::findByIds()` as unused and buggy. Use Doctrine's `findAllBy(['id' => [1,2]])` instead.
 - Removed `Mautic\PluginBundle\Controller::getIntegrationCampaignsAction()` as unused and buggy together with JS function `Mautic.getIntegrationCampaigns`
 - Removed `Mautic\CoreBundle\Tests\Functional\Service::class` as unused and testing 3rd party code instead of Mautic.
+- Removed `Mautic\CoreBundle\Doctrine\TranslationMigrationTrait` as unused and deprecated.
+- Removed `Mautic\CoreBundle\Doctrine\VariantMigrationTrait` as unused and deprecated.
+- Removed `Mautic\IntegrationsBundle\Form\Type\NotBlankIfPublishedConstraintTrait` as unused.
+- Removed `Mautic\IntegrationsBundle\Form\Type\Auth\BasicAuthKeysTrait` as unused.
+- Removed `Mautic\IntegrationsBundle\Form\Type\Auth\Oauth1aTwoLeggedKeysTrait` as unused.
 - Removed these services as the authentication system in Symfony 6 has changed and these services were using code that no longer existed.
     - `mautic.user.form_guard_authenticator` (`Mautic\UserBundle\Security\Authenticator\FormAuthenticator::class`)
     - `mautic.user.preauth_authenticator` (`Mautic\UserBundle\Security\Authenticator\PreAuthAuthenticator::class`)
