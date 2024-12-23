@@ -27,6 +27,7 @@
 - Removed `Mautic\CampaignBundle\Entity::getEventsByChannel()` as unused and buggy. No replacement
 - Removed `Mautic\CoreBundle\Test::createAnotherClient()` as unused. No replacement.
 - Removed `Mautic\NotificationBundle\Entity::getLeadStats()` as unused and buggy. No replacment
+- Removed `Mautic\WebhookBundle\Entity::removeOldLogs()` as it was deprecated. Use `removeLimitExceedLogs()` instead.
 - Removed `Mautic\PageBundle\Entity::findByIds()` as unused and buggy. Use Doctrine's `findAllBy(['id' => [1,2]])` instead.
 - Removed `Mautic\PluginBundle\Controller::getIntegrationCampaignsAction()` as unused and buggy together with JS function `Mautic.getIntegrationCampaigns`
 - Removed `Mautic\CoreBundle\Tests\Functional\Service::class` as unused and testing 3rd party code instead of Mautic.
