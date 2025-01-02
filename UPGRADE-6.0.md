@@ -13,6 +13,7 @@
     - The `lightsaml/sp-bundle` package was replaced with a maintained fork `javer/sp-bundle`
 - Deprecated `Mautic\LeadBundle\Model\FieldModel::getUniqueIdentiferFields` and `Mautic\LeadBundle\Model\FieldModel::getUniqueIdentifierFields` were removed. Use `Mautic\LeadBundle\Field\FieldsWithUniqueIdentifier::getFieldsWithUniqueIdentifier` instead.
 - The signature for the `Mautic\PluginBundle\Integration\AbstractIntegration::__construct()` had to be changed as the `SessionInterface` service no longer exists in Symfony 6. So it was removed from the constructor and session is being fetched from the `RequestStack` instead.
+- Removed `Mautic\CoreBundle\Factory\MauticFactory::getHelper` use dependency injection instead.
 - Removed `Mautic\CoreBundle\Factory\MauticFactory::getDebugMode` use dependency injection instead.
 - Removed `Mautic\CoreBundle\Factory\MauticFactory::getMauticBundles` use BundleHelper instead.
 - Removed `Mautic\CoreBundle\Factory\MauticFactory::getPluginBundles` use BundleHelper instead.
@@ -23,13 +24,21 @@
 - Removed `Mautic\CoreBundle\Factory\MauticFactory::getLocalConfigFile` use dependency injection with KernelInterface, which will retrieve \AppKernel, then invoke getLocalConfigFile().
 - Removed `Mautic\CoreBundle\Factory\MauticFactory::getEnvironment` use dependency injection instead.
 - Removed `Mautic\CoreBundle\Factory\MauticFactory::getIpAddress` use IpLookupHelper instead.
+- Removed `Mautic\CoreBundle\Factory\MauticFactory::getSecurity` use dependency injection instead.
+- Removed `Mautic\CoreBundle\Factory\MauticFactory::getSecurityContext` use dependency injection instead.
 - Removed `Mautic\CoreBundle\Factory\MauticFactory::getTwig` use DI with the `\Twig\Environment` instead.
 - Removed `Mautic\CampaignBundle\Entity::getEventsByChannel()` as unused and buggy. No replacement
 - Removed `Mautic\CoreBundle\Test::createAnotherClient()` as unused. No replacement.
 - Removed `Mautic\NotificationBundle\Entity::getLeadStats()` as unused and buggy. No replacment
+- Removed `Mautic\WebhookBundle\Entity::removeOldLogs()` as it was deprecated. Use `removeLimitExceedLogs()` instead.
 - Removed `Mautic\PageBundle\Entity::findByIds()` as unused and buggy. Use Doctrine's `findAllBy(['id' => [1,2]])` instead.
 - Removed `Mautic\PluginBundle\Controller::getIntegrationCampaignsAction()` as unused and buggy together with JS function `Mautic.getIntegrationCampaigns`
 - Removed `Mautic\CoreBundle\Tests\Functional\Service::class` as unused and testing 3rd party code instead of Mautic.
+- Removed `Mautic\CoreBundle\Doctrine\TranslationMigrationTrait` as unused and deprecated.
+- Removed `Mautic\CoreBundle\Doctrine\VariantMigrationTrait` as unused and deprecated.
+- Removed `Mautic\IntegrationsBundle\Form\Type\NotBlankIfPublishedConstraintTrait` as unused.
+- Removed `Mautic\IntegrationsBundle\Form\Type\Auth\BasicAuthKeysTrait` as unused.
+- Removed `Mautic\IntegrationsBundle\Form\Type\Auth\Oauth1aTwoLeggedKeysTrait` as unused.
 - Removed these services as the authentication system in Symfony 6 has changed and these services were using code that no longer existed.
     - `mautic.user.form_guard_authenticator` (`Mautic\UserBundle\Security\Authenticator\FormAuthenticator::class`)
     - `mautic.user.preauth_authenticator` (`Mautic\UserBundle\Security\Authenticator\PreAuthAuthenticator::class`)
