@@ -163,8 +163,11 @@ class ContactManagementCest
         $I->waitForText($contactName, 30);
         $I->see($contactName);
 
-        // Click on the delete button.
-        $I->click('//*[@id="delete"]');
+        // Click the dropdown caret to show the delete option
+        $I->click(ContactPage::$dropDown);
+
+        // Click on the delete option
+        $I->click(ContactPage::$delete);
 
         // Wait for the modal to show and confirm deletion
         $I->waitForElementVisible(ContactPage::$ConfirmDelete, 5);
