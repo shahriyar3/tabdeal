@@ -369,7 +369,7 @@ class ContactManagementCest
         $I->pressKey(ContactPage::$addToTheFollowingSegmentInput, WebDriverKeys::ENTER);
         $I->click(ContactPage::$changeSegmentModalSaveButton);
 
-      // Clear all selection
+        // Clear all selection
         $I->click(ContactPage::$clearAllContactsSelection);
 
         // Search again for contacts in the "Segment Test 3" segment
