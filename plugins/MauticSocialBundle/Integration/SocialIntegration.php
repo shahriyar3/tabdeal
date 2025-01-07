@@ -49,7 +49,7 @@ abstract class SocialIntegration extends AbstractIntegration
         FieldsWithUniqueIdentifier $fieldsWithUniqueIdentifier,
         IntegrationEntityModel $integrationEntityModel,
         DoNotContact $doNotContact,
-        protected IntegrationHelper $integrationHelper
+        protected IntegrationHelper $integrationHelper,
     ) {
         parent::__construct(
             $eventDispatcher,
@@ -103,7 +103,7 @@ abstract class SocialIntegration extends AbstractIntegration
         if (empty($fields)) {
             $s         = $this->getName();
             $available = $this->getAvailableLeadFields($settings);
-            if (empty($available) || !is_array($available)) {
+            if (empty($available)) {
                 return [];
             }
             // create social profile fields
