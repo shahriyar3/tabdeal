@@ -16,6 +16,7 @@
 - Removed `Mautic\CoreBundle\Factory\MauticFactory::getHelper` use dependency injection instead.
 - Removed `Mautic\CoreBundle\Factory\MauticFactory::getDebugMode` use dependency injection instead.
 - Removed `Mautic\CoreBundle\Factory\MauticFactory::getMauticBundles` use BundleHelper instead.
+- Removed `Mautic\CoreBundle\Factory\MauticFactory::getKernel` use dependency injection instead.
 - Removed `Mautic\CoreBundle\Factory\MauticFactory::getPluginBundles` use BundleHelper instead.
 - Removed `Mautic\CoreBundle\Factory\MauticFactory::getBundleConfig` use BundleHelper instead.
 - Removed `Mautic\CoreBundle\Factory\MauticFactory::getUser` use UserHelper instead.
