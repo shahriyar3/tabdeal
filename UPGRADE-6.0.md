@@ -41,6 +41,12 @@
     - `mautic.user.preauth_authenticator` (`Mautic\UserBundle\Security\Authenticator\PreAuthAuthenticator::class`)
     - `mautic.security.authentication_listener` (`Mautic\UserBundle\Security\Firewall\AuthenticationListener::class`)
 - The `GrapesJsData` class was moved from `Mautic\InstallBundle\InstallFixtures\ORM` namespace to `MauticPlugin\GrapesJsBuilderBundle\InstallFixtures\ORM` as plugins should not be coupled with core bundles.
+- The `lightsaml/sp-bundle` package was replaced with a maintained fork `lightsaml2/sp-bundle`
+- `Mautic\PageBundle\Form\Type\PagePublishDatesType` was removed.
+- `getSessionName` was removed from `Mautic\PageBundle\Helper\TrackingHelper` No session for anonymous users. Use `getCacheKey`.
+- `getSession` was removed from `Mautic\PageBundle\Helper\TrackingHelper` No session for anonymous users. Use `getCacheItem`.
+- `updateSession` was removed from `Mautic\PageBundle\Helper\TrackingHelper` No session for anonymous users. Use `updateCacheItem`.
+- `getNewVsReturningPieChartData` was removed from `Mautic\PageBundle\Model\PageModel`. Use `getUniqueVsReturningPieChartData()` instead.
 
 
 ## Most notable changes required by Symfony 6
@@ -99,10 +105,3 @@ class NeedsSession
     }
 }
 ```
-
-    - The `lightsaml/sp-bundle` package was replaced with a maintained fork `lightsaml2/sp-bundle`
-- `Mautic\PageBundle\Form\Type\PagePublishDatesType` was removed.
-- `getSessionName` was removed from `Mautic\PageBundle\Helper\TrackingHelper` No session for anonymous users. Use `getCacheKey`.
-- `getSession` was removed from `Mautic\PageBundle\Helper\TrackingHelper` No session for anonymous users. Use `getCacheItem`.
-- `updateSession` was removed from `Mautic\PageBundle\Helper\TrackingHelper` No session for anonymous users. Use `updateCacheItem`.
-- `getNewVsReturningPieChartData` was removed from `Mautic\PageBundle\Model\PageModel`. Use `getUniqueVsReturningPieChartData()` instead.
