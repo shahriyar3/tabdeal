@@ -371,6 +371,7 @@ class ContactManagementCest
 
         // Clear all selection
         $I->click(ContactPage::$clearAllContactsSelection);
+        $I->wait(1);
 
         // Search again for contacts in the "Segment Test 3" segment
         $I->fillField(ContactPage::$searchBar, 'segment:segment-test-3');
@@ -429,7 +430,9 @@ class ContactManagementCest
 
         // Select the first and second contacts from the list
         $contact->selectContactFromList(1);
+        $I->wait(1);
         $contact->selectContactFromList(2);
+        $I->wait(1);
 
         // Select change segment option from dropdown for multiple selections
         $contact->selectOptionFromDropDownForMultipleSelections(9);
