@@ -29,6 +29,8 @@
 - Removed `Mautic\CoreBundle\Factory\MauticFactory::getSecurityContext` use dependency injection instead.
 - Removed `Mautic\CoreBundle\Factory\MauticFactory::getDispatcher` use dependency injection instead.
 - Removed `Mautic\CoreBundle\Factory\MauticFactory::getTwig` use DI with the `\Twig\Environment` instead.
+- Removed `Mautic\CoreBundle\Factory\MauticFactory::getTheme` use DI with the `\Mautic\CoreBundle\Helper\ThemeHelper` instead.
+- Removed `Mautic\CoreBundle\Factory\MauticFactory::getInstalledThemes` use DI with the `\Mautic\CoreBundle\Helper\ThemeHelper` instead.
 - Removed `Mautic\CampaignBundle\Entity::getEventsByChannel()` as unused and buggy. No replacement
 - Removed `Mautic\CoreBundle\Test::createAnotherClient()` as unused. No replacement.
 - Removed `Mautic\NotificationBundle\Entity::getLeadStats()` as unused and buggy. No replacment
