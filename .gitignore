@@ -13,6 +13,7 @@
 !.gitpod.Dockerfile
 !.gitpod.yml
 !.ddev/commands/web/dd
+.ddev/commands/host/phpmyadmin
 .php_cs.cache
 /.env.local
 /.env.local.php
