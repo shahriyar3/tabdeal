@@ -167,7 +167,7 @@ class ContactManagementCest
         $I->waitForElementVisible(ContactPage::$dropDown, 10);
 
         // Scroll to the dropdown button to bring it into view
-        $I->scrollTo(ContactPage::$dropDown);
+        $I->scrollTo(ContactPage::$dropDown, 0, -100);
 
         // Wait until the dropdown button is clickable
         $I->waitForElementClickable(ContactPage::$dropDown, 10);
