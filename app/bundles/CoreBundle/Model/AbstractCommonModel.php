@@ -5,6 +5,7 @@ namespace Mautic\CoreBundle\Model;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Mautic\CoreBundle\Doctrine\Paginator\SimplePaginator;
+use Mautic\CoreBundle\DTO\GlobalSearchFilterDTO;
 use Mautic\CoreBundle\Entity\CommonRepository;
 use Mautic\CoreBundle\Entity\FormEntity;
 use Mautic\CoreBundle\Helper\ClickthroughHelper;
@@ -245,5 +246,44 @@ abstract class AbstractCommonModel implements MauticModelInterface
     protected function getServiceRepository(string $class)
     {
         return $this->em->getRepository($class);
+    }
+
+    public function getEntitiesForGlobalSearch(GlobalSearchFilterDTO $filterDTO): ?Paginator
+    {
+        $filter = $filterDTO->getFilters();
+
+        if (!$this->canViewOthersEntity()) {
+            $filter['force'][] = [
+                'column' => $this->getRepository()->getTableAlias().'.createdBy',
+                'expr'   => 'eq',
+                'value'  => $this->userHelper->getUser()->getId(),
+            ];
+        }
+
+        return $this->getRepository()->getEntitiesForGlobalSearch($filter);
+    }
+
+    public function canViewOwnEntity(): bool
+    {
+        $permissionBase = $this->getPermissionBase();
+        if ($this->security->checkPermissionExists("$permissionBase:viewown")) {
+            return $this->security->isGranted(["$permissionBase:viewown"]);
+        } elseif ($this->security->checkPermissionExists("$permissionBase:view")) {
+            return $this->security->isGranted("$permissionBase:view");
+        }
+
+        return $this->userHelper->getUser()->isAdmin();
+    }
+
+    public function canViewOthersEntity(): bool
+    {
+        $permissionBase = $this->getPermissionBase();
+        if ($this->security->checkPermissionExists("$permissionBase:viewother")) {
+            return $this->security->isGranted(["$permissionBase:viewother"]);
+        } elseif ($this->security->checkPermissionExists("$permissionBase:view")) {
+            return $this->security->isGranted("$permissionBase:view");
+        }
+
+        return $this->userHelper->getUser()->isAdmin();
     }
 }
