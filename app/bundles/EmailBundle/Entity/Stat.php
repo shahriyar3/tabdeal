@@ -19,10 +19,7 @@ class Stat
 
     public const TABLE_NAME = 'email_stats';
 
-    /**
-     * @var string|null
-     */
-    private $id;
+    private ?string $id = null;
 
     /**
      * @var Email|null
@@ -49,10 +46,7 @@ class Stat
      */
     private $ipAddress;
 
-    /**
-     * @var \DateTimeInterface|null
-     */
-    private $dateSent;
+    private ?\DateTimeInterface $dateSent = null;
 
     /**
      * @var bool
@@ -109,10 +103,7 @@ class Stat
      */
     private $openCount = 0;
 
-    /**
-     * @var \DateTimeInterface|null
-     */
-    private $lastOpened;
+    private ?\DateTimeInterface $lastOpened = null;
 
     /**
      * @var array
@@ -260,36 +251,24 @@ class Stat
             ->build();
     }
 
-    /**
-     * @return \DateTimeInterface|null
-     */
-    public function getDateRead()
+    public function getDateRead(): ?\DateTimeInterface
     {
         return $this->dateRead;
     }
 
-    /**
-     * @param \DateTimeInterface|null $dateRead
-     */
-    public function setDateRead($dateRead): void
+    public function setDateRead(?\DateTimeInterface $dateRead): void
     {
         $dateRead = $this->toDateTime($dateRead);
         $this->addChange('dateRead', $this->dateRead, $dateRead);
         $this->dateRead = $dateRead;
     }
 
-    /**
-     * @return \DateTimeInterface|null
-     */
-    public function getDateSent()
+    public function getDateSent(): ?\DateTimeInterface
     {
         return $this->dateSent;
     }
 
-    /**
-     * @param \DateTimeInterface|null $dateSent
-     */
-    public function setDateSent($dateSent): void
+    public function setDateSent(?\DateTimeInterface $dateSent): void
     {
         $dateSent = $this->toDateTime($dateSent);
         $this->addChange('dateSent', $this->dateSent, $dateSent);
@@ -309,9 +288,9 @@ class Stat
         $this->email = $email;
     }
 
-    public function getId(): int
+    public function getId(): ?string
     {
-        return (int) $this->id;
+        return $this->id;
     }
 
     /**
@@ -579,20 +558,12 @@ class Stat
         return $this;
     }
 
-    /**
-     * @return \DateTimeInterface|null
-     */
-    public function getLastOpened()
+    public function getLastOpened(): ?\DateTimeInterface
     {
         return $this->lastOpened;
     }
 
-    /**
-     * @param \DateTimeInterface|null $lastOpened
-     *
-     * @return Stat
-     */
-    public function setLastOpened($lastOpened)
+    public function setLastOpened(?\DateTimeInterface $lastOpened): self
     {
         $lastOpened = $this->toDateTime($lastOpened);
         $this->addChange('lastOpened', $this->lastOpened, $lastOpened);

@@ -15,6 +15,13 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class EmailSendFunctionalTest extends MauticMysqlTestCase
 {
+    protected function setUp(): void
+    {
+        $this->configParams['disable_trackable_urls'] = false;
+
+        parent::setUp();
+    }
+
     public function testSendEmailWithContact(): void
     {
         $segment = $this->createSegment('Segment A', 'seg-a');
@@ -31,12 +38,11 @@ final class EmailSendFunctionalTest extends MauticMysqlTestCase
         $this->em->flush();
         $this->em->clear();
 
-        $this->client->request(
+        $this->setCsrfHeader();
+        $this->client->xmlHttpRequest(
             Request::METHOD_POST,
             '/s/ajax?action=email:sendBatch',
-            ['id' => $email->getId(), 'pending' => 2],
-            [],
-            $this->createAjaxHeaders()
+            ['id' => $email->getId(), 'pending' => 2]
         );
 
         $response = $this->client->getResponse();
@@ -75,7 +81,7 @@ final class EmailSendFunctionalTest extends MauticMysqlTestCase
         preg_match($unsubscribeUrlPattern, $messages[0]->getHtmlBody(), $unsubscribeMatches1);
         preg_match($resubscribeUrlPattern, $messages[0]->getHtmlBody(), $resubscribeMatches1);
 
-        Assert::assertNotEmpty($unsubscribeMatches1[1], $messages[0]->getHtmlBody());
+        Assert::assertSame(20, strlen($unsubscribeMatches1[1]), $messages[0]->getHtmlBody());
         Assert::assertEquals($unsubscribeMatches1[1], $resubscribeMatches1[1], $messages[0]->getHtmlBody());
 
         // Second email:
@@ -83,7 +89,7 @@ final class EmailSendFunctionalTest extends MauticMysqlTestCase
         preg_match($unsubscribeUrlPattern, $messages[1]->getHtmlBody(), $unsubscribeMatches2);
         preg_match($resubscribeUrlPattern, $messages[1]->getHtmlBody(), $resubscribeMatches2);
 
-        Assert::assertNotEmpty($unsubscribeMatches2[1], $messages[1]->getHtmlBody());
+        Assert::assertSame(20, strlen($unsubscribeMatches2[1]), $messages[1]->getHtmlBody());
         Assert::assertEquals($unsubscribeMatches2[1], $resubscribeMatches2[1], $messages[1]->getHtmlBody());
 
         // The email stat hashes cannot be the same in different emails:
@@ -109,7 +115,7 @@ final class EmailSendFunctionalTest extends MauticMysqlTestCase
     }
 
     /**
-     * @return array<string, LEAD>
+     * @return array<string, Lead>
      */
     private function createContacts(int $count, LeadList $segment): array
     {
