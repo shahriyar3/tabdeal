@@ -27,7 +27,10 @@
 - Removed `Mautic\CoreBundle\Factory\MauticFactory::getIpAddress` use IpLookupHelper instead.
 - Removed `Mautic\CoreBundle\Factory\MauticFactory::getSecurity` use dependency injection instead.
 - Removed `Mautic\CoreBundle\Factory\MauticFactory::getSecurityContext` use dependency injection instead.
+- Removed `Mautic\CoreBundle\Factory\MauticFactory::getDispatcher` use dependency injection instead.
 - Removed `Mautic\CoreBundle\Factory\MauticFactory::getTwig` use DI with the `\Twig\Environment` instead.
+- Removed `Mautic\CoreBundle\Factory\MauticFactory::getTheme` use DI with the `\Mautic\CoreBundle\Helper\ThemeHelper` instead.
+- Removed `Mautic\CoreBundle\Factory\MauticFactory::getInstalledThemes` use DI with the `\Mautic\CoreBundle\Helper\ThemeHelper` instead.
 - Removed `Mautic\CampaignBundle\Entity::getEventsByChannel()` as unused and buggy. No replacement
 - Removed `Mautic\CoreBundle\Test::createAnotherClient()` as unused. No replacement.
 - Removed `Mautic\NotificationBundle\Entity::getLeadStats()` as unused and buggy. No replacment
@@ -45,6 +48,12 @@
     - `mautic.user.preauth_authenticator` (`Mautic\UserBundle\Security\Authenticator\PreAuthAuthenticator::class`)
     - `mautic.security.authentication_listener` (`Mautic\UserBundle\Security\Firewall\AuthenticationListener::class`)
 - The `GrapesJsData` class was moved from `Mautic\InstallBundle\InstallFixtures\ORM` namespace to `MauticPlugin\GrapesJsBuilderBundle\InstallFixtures\ORM` as plugins should not be coupled with core bundles.
+- The `lightsaml/sp-bundle` package was replaced with a maintained fork `lightsaml2/sp-bundle`
+- `Mautic\PageBundle\Form\Type\PagePublishDatesType` was removed.
+- `getSessionName` was removed from `Mautic\PageBundle\Helper\TrackingHelper` No session for anonymous users. Use `getCacheKey`.
+- `getSession` was removed from `Mautic\PageBundle\Helper\TrackingHelper` No session for anonymous users. Use `getCacheItem`.
+- `updateSession` was removed from `Mautic\PageBundle\Helper\TrackingHelper` No session for anonymous users. Use `updateCacheItem`.
+- `getNewVsReturningPieChartData` was removed from `Mautic\PageBundle\Model\PageModel`. Use `getUniqueVsReturningPieChartData()` instead.
 
 
 ## Most notable changes required by Symfony 6
