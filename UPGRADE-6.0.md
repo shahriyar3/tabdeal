@@ -13,8 +13,10 @@
     - The `lightsaml/sp-bundle` package was replaced with a maintained fork `javer/sp-bundle`
 - Deprecated `Mautic\LeadBundle\Model\FieldModel::getUniqueIdentiferFields` and `Mautic\LeadBundle\Model\FieldModel::getUniqueIdentifierFields` were removed. Use `Mautic\LeadBundle\Field\FieldsWithUniqueIdentifier::getFieldsWithUniqueIdentifier` instead.
 - The signature for the `Mautic\PluginBundle\Integration\AbstractIntegration::__construct()` had to be changed as the `SessionInterface` service no longer exists in Symfony 6. So it was removed from the constructor and session is being fetched from the `RequestStack` instead.
+- Removed `Mautic\CoreBundle\Factory\MauticFactory::getHelper` use dependency injection instead.
 - Removed `Mautic\CoreBundle\Factory\MauticFactory::getDebugMode` use dependency injection instead.
 - Removed `Mautic\CoreBundle\Factory\MauticFactory::getMauticBundles` use BundleHelper instead.
+- Removed `Mautic\CoreBundle\Factory\MauticFactory::getKernel` use dependency injection instead.
 - Removed `Mautic\CoreBundle\Factory\MauticFactory::getPluginBundles` use BundleHelper instead.
 - Removed `Mautic\CoreBundle\Factory\MauticFactory::getBundleConfig` use BundleHelper instead.
 - Removed `Mautic\CoreBundle\Factory\MauticFactory::getUser` use UserHelper instead.
@@ -23,7 +25,12 @@
 - Removed `Mautic\CoreBundle\Factory\MauticFactory::getLocalConfigFile` use dependency injection with KernelInterface, which will retrieve \AppKernel, then invoke getLocalConfigFile().
 - Removed `Mautic\CoreBundle\Factory\MauticFactory::getEnvironment` use dependency injection instead.
 - Removed `Mautic\CoreBundle\Factory\MauticFactory::getIpAddress` use IpLookupHelper instead.
+- Removed `Mautic\CoreBundle\Factory\MauticFactory::getSecurity` use dependency injection instead.
+- Removed `Mautic\CoreBundle\Factory\MauticFactory::getSecurityContext` use dependency injection instead.
+- Removed `Mautic\CoreBundle\Factory\MauticFactory::getDispatcher` use dependency injection instead.
 - Removed `Mautic\CoreBundle\Factory\MauticFactory::getTwig` use DI with the `\Twig\Environment` instead.
+- Removed `Mautic\CoreBundle\Factory\MauticFactory::getTheme` use DI with the `\Mautic\CoreBundle\Helper\ThemeHelper` instead.
+- Removed `Mautic\CoreBundle\Factory\MauticFactory::getInstalledThemes` use DI with the `\Mautic\CoreBundle\Helper\ThemeHelper` instead.
 - Removed `Mautic\CampaignBundle\Entity::getEventsByChannel()` as unused and buggy. No replacement
 - Removed `Mautic\CoreBundle\Test::createAnotherClient()` as unused. No replacement.
 - Removed `Mautic\NotificationBundle\Entity::getLeadStats()` as unused and buggy. No replacment
@@ -41,6 +48,12 @@
     - `mautic.user.preauth_authenticator` (`Mautic\UserBundle\Security\Authenticator\PreAuthAuthenticator::class`)
     - `mautic.security.authentication_listener` (`Mautic\UserBundle\Security\Firewall\AuthenticationListener::class`)
 - The `GrapesJsData` class was moved from `Mautic\InstallBundle\InstallFixtures\ORM` namespace to `MauticPlugin\GrapesJsBuilderBundle\InstallFixtures\ORM` as plugins should not be coupled with core bundles.
+- The `lightsaml/sp-bundle` package was replaced with a maintained fork `lightsaml2/sp-bundle`
+- `Mautic\PageBundle\Form\Type\PagePublishDatesType` was removed.
+- `getSessionName` was removed from `Mautic\PageBundle\Helper\TrackingHelper` No session for anonymous users. Use `getCacheKey`.
+- `getSession` was removed from `Mautic\PageBundle\Helper\TrackingHelper` No session for anonymous users. Use `getCacheItem`.
+- `updateSession` was removed from `Mautic\PageBundle\Helper\TrackingHelper` No session for anonymous users. Use `updateCacheItem`.
+- `getNewVsReturningPieChartData` was removed from `Mautic\PageBundle\Model\PageModel`. Use `getUniqueVsReturningPieChartData()` instead.
 
 
 ## Most notable changes required by Symfony 6
