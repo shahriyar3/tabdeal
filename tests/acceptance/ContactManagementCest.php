@@ -416,6 +416,12 @@ class ContactManagementCest
         $I->click(ContactPage::$clearAllContactsSelection);
         $I->wait(1);
 
+        // Scroll to the search Bar to bring it into view
+        $I->scrollTo(ContactPage::$searchBar, 0, -100);
+
+        // Wait until the search Bar is clickable
+        $I->waitForElementClickable(ContactPage::$searchBar, 10);
+
         // Search for contacts in the "Segment Test 3" segment
         $I->fillField(ContactPage::$searchBar, 'segment:segment-test-3');
         $I->wait(1);
