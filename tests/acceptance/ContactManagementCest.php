@@ -412,9 +412,9 @@ class ContactManagementCest
         $I->pressKey(ContactPage::$removeFromTheFollowingSegmentInput, WebDriverKeys::ENTER);
         $I->click(ContactPage::$changeSegmentModalSaveButton);
 
-        // Clear the search bar
-        $I->click(ContactPage::$clearSearch);
-        $I->waitForElementVisible('#leadTable', 10);
+        // Clear all selection
+        $I->click(ContactPage::$clearAllContactsSelection);
+        $I->wait(1);
 
         // Search for contacts in the "Segment Test 3" segment
         $I->fillField(ContactPage::$searchBar, 'segment:segment-test-3');
