@@ -163,6 +163,15 @@ class ContactManagementCest
         $I->waitForText($contactName, 30);
         $I->see($contactName);
 
+        // Ensure the dropdown button is visible on the page
+        $I->waitForElementVisible(ContactPage::$dropDown, 10);
+
+        // Scroll to the dropdown button to bring it into view
+        $I->scrollTo(ContactPage::$dropDown, 0, -100);
+
+        // Wait until the dropdown button is clickable
+        $I->waitForElementClickable(ContactPage::$dropDown, 10);
+
         // Click the dropdown caret to show the delete option
         $I->click(ContactPage::$dropDown);
 
