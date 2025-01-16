@@ -380,7 +380,6 @@ class ContactManagementCest
 
         // Clear all selection
         $I->click(ContactPage::$clearAllContactsSelection);
-        $I->wait(1);
 
         // Scroll to the search Bar to bring it into view
         $I->scrollTo(ContactPage::$searchBar, 0, -100);
@@ -423,7 +422,6 @@ class ContactManagementCest
 
         // Clear all selection
         $I->click(ContactPage::$clearAllContactsSelection);
-        $I->wait(1);
 
         // Scroll to the search Bar to bring it into view
         $I->scrollTo(ContactPage::$searchBar, 0, -100);
