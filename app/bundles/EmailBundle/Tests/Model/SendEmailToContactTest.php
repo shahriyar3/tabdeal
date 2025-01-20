@@ -26,7 +26,6 @@ use Mautic\LeadBundle\Entity\Lead;
 use Mautic\LeadBundle\Model\DoNotContact;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Log\LoggerInterface;
-use Psr\Log\NullLogger;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Mailer\Mailer;
@@ -248,10 +247,6 @@ class SendEmailToContactTest extends \PHPUnit\Framework\TestCase
                     default => '',
                 }
             );
-        $factoryMock->method('getLogger')
-            ->willReturn(
-                new NullLogger()
-            );
         $routerMock = $this->createMock(Router::class);
 
         $requestStack = new RequestStack();
@@ -345,10 +340,6 @@ class SendEmailToContactTest extends \PHPUnit\Framework\TestCase
                 fn ($param) => match ($param) {
                     default => '',
                 }
-            );
-        $factoryMock->method('getLogger')
-            ->willReturn(
-                new NullLogger()
             );
 
         $mockEm = $this->createMock(EntityManager::class);
@@ -451,10 +442,6 @@ class SendEmailToContactTest extends \PHPUnit\Framework\TestCase
                 fn ($param) => match ($param) {
                     default => '',
                 }
-            );
-        $factoryMock->method('getLogger')
-            ->willReturn(
-                new NullLogger()
             );
         $routerMock = $this->createMock(Router::class);
 
@@ -561,7 +548,6 @@ class SendEmailToContactTest extends \PHPUnit\Framework\TestCase
             );
 
         $this->fromEmaiHelper->method('getFromAddressConsideringOwner')->willReturn(new AddressDTO('someone@somewhere.com'));
-        $factoryMock->method('getLogger')->willReturn(new NullLogger());
         $routerMock = $this->createMock(Router::class);
         $twig       = $this->createMock(Environment::class);
 
@@ -642,7 +628,6 @@ class SendEmailToContactTest extends \PHPUnit\Framework\TestCase
                     ]
                 )
             );
-        $mockFactory->method('getLogger')->willReturn(new NullLogger());
 
         /** @var MockObject&FromEmailHelper $fromEmailHelper */
         $fromEmailHelper = $this->createMock(FromEmailHelper::class);

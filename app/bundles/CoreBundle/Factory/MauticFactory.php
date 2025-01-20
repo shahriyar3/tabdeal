@@ -7,7 +7,6 @@ use Doctrine\Persistence\ManagerRegistry;
 use Mautic\CoreBundle\Helper\DateTimeHelper;
 use Mautic\CoreBundle\Model\AbstractCommonModel;
 use Mautic\EmailBundle\Helper\MailHelper;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -22,7 +21,6 @@ class MauticFactory
         private ContainerInterface $container,
         private ModelFactory $modelFactory,
         private ManagerRegistry $doctrine,
-        private LoggerInterface $logger,
     ) {
     }
 
@@ -131,22 +129,6 @@ class MauticFactory
     public function getVersion()
     {
         return $this->container->get('kernel')->getVersion();
-    }
-
-    /**
-     * Get Symfony's logger.
-     *
-     * @param bool|false $system
-     *
-     * @return LoggerInterface
-     */
-    public function getLogger($system = false)
-    {
-        if ($system) {
-            return $this->logger;
-        }
-
-        return $this->container->get('monolog.logger.mautic');
     }
 
     public function serviceExists($service): bool
