@@ -28,6 +28,8 @@
 - Removed `Mautic\CoreBundle\Factory\MauticFactory::getEnvironment` use dependency injection instead.
 - Removed `Mautic\CoreBundle\Factory\MauticFactory::getIpAddress` use IpLookupHelper instead.
 - Removed `Mautic\CoreBundle\Factory\MauticFactory::getSecurity` use dependency injection instead.
+- Removed `Mautic\CoreBundle\Factory\MauticFactory::get` use dependency injection instead.
+- Removed `Mautic\CoreBundle\Factory\MauticFactory::serviceExists` use dependency injection instead.
 - Removed `Mautic\CoreBundle\Factory\MauticFactory::getSecurityContext` use dependency injection instead.
 - Removed `Mautic\CoreBundle\Factory\MauticFactory::getDispatcher` use dependency injection instead.
 - Removed `Mautic\CoreBundle\Factory\MauticFactory::getMailer` use dependency injection instead with \Mautic\EmailBundle\Helper\MailHelper.
