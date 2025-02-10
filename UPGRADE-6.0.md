@@ -72,7 +72,7 @@
 - `getSession` was removed from `Mautic\PageBundle\Helper\TrackingHelper` No session for anonymous users. Use `getCacheItem`.
 - `updateSession` was removed from `Mautic\PageBundle\Helper\TrackingHelper` No session for anonymous users. Use `updateCacheItem`.
 - `getNewVsReturningPieChartData` was removed from `Mautic\PageBundle\Model\PageModel`. Use `getUniqueVsReturningPieChartData()` instead.
-
+- Replaced the `tightenco/collect:^8.16.0` package with `illuminate/collections:^10.48`.
 
 ## Most notable changes required by Symfony 6
 
