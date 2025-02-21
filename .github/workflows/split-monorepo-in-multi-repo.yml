@@ -84,6 +84,7 @@ jobs:
                     - theme-welcome
                     - theme-attract
                     - theme-creative
+                    - theme-mono
                     - theme-capture
         name: Sync commits into mautic/${{ matrix.config }}
         steps:
