@@ -231,6 +231,11 @@
             "target": "git@github.com:mautic/theme-creative.git"
         },
         {
+            "name": "theme-formscape",
+            "directory": "themes/formscape",
+            "target": "git@github.com:mautic/theme-formscape.git"
+        },
+        {
             "name": "theme-reachout",
             "directory": "themes/reachout",
             "target": "git@github.com:mautic/theme-reachout.git"
