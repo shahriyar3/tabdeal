@@ -231,6 +231,11 @@
             "target": "git@github.com:mautic/theme-creative.git"
         },
         {
+            "name": "theme-chord",
+            "directory": "themes/chord",
+            "target": "git@github.com:mautic/theme-chord.git"
+        },
+        {
             "name": "theme-formscape",
             "directory": "themes/formscape",
             "target": "git@github.com:mautic/theme-formscape.git"
@@ -255,6 +260,5 @@
             "directory": "themes/capture",
             "target": "git@github.com:mautic/theme-capture.git"
         }
-
     ]
 }

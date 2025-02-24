@@ -84,6 +84,7 @@ jobs:
                     - theme-welcome
                     - theme-attract
                     - theme-creative
+                    - theme-chord
                     - theme-formscape
                     - theme-reachout
                     - theme-blend
