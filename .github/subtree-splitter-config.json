@@ -231,6 +231,11 @@
             "target": "git@github.com:mautic/theme-creative.git"
         },
         {
+            "name": "theme-eclipse",
+            "directory": "themes/eclipse",
+            "target": "git@github.com:mautic/theme-eclipse.git"
+        },
+        {
             "name": "theme-chord",
             "directory": "themes/chord",
             "target": "git@github.com:mautic/theme-chord.git"
