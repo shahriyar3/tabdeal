@@ -12,6 +12,7 @@ As the legacy builder was removed these JS libraries were removed as well:
 - Froala (outdated with security vulnerabilities)
 - CodeMirror JS (still installed in the GrapesJS plugin, but not part of Mautic itself)
 - Jquery UI - Safe Blur
+- Modernizr as not necessary anymore as the modern browsers support open standards
 
 ### PHP
 - Multiple method signatures changed to improve type coverage. Some forced by dependency updates, some in Mautic itself. Run `composer phpstan` when your plugin is installed to get the full list related to your plugin.
@@ -70,6 +71,7 @@ As the legacy builder was removed these JS libraries were removed as well:
 - Removed `Mautic\IntegrationsBundle\Form\Type\NotBlankIfPublishedConstraintTrait` as unused.
 - Removed `Mautic\IntegrationsBundle\Form\Type\Auth\BasicAuthKeysTrait` as unused.
 - Removed `Mautic\IntegrationsBundle\Form\Type\Auth\Oauth1aTwoLeggedKeysTrait` as unused.
+- Removed `Mautic\CoreBundle\Helper\CoreParametersHelper::getParameter()`. Use `Mautic\CoreBundle\Helper\CoreParametersHelper::get()` instead.
 - Removed these services as the authentication system in Symfony 6 has changed and these services were using code that no longer existed.
     - `mautic.user.form_guard_authenticator` (`Mautic\UserBundle\Security\Authenticator\FormAuthenticator::class`)
     - `mautic.user.preauth_authenticator` (`Mautic\UserBundle\Security\Authenticator\PreAuthAuthenticator::class`)

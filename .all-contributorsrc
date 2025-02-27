@@ -1467,7 +1467,8 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/178993450?v=4",
       "profile": "https://github.com/rishithreddy89",
       "contributions": [
-        "code"
+        "code",
+        "userTesting"
       ]
     },
     {
@@ -1486,6 +1487,15 @@
       "profile": "https://github.com/kingsedem",
       "contributions": [
         "userTesting"
+      ]
+    },
+    {
+      "login": "Hugo-Prossaird",
+      "name": "Hugo-Prossaird",
+      "avatar_url": "https://avatars.githubusercontent.com/u/176997845?v=4",
+      "profile": "https://github.com/Hugo-Prossaird",
+      "contributions": [
+        "code"
       ]
     }
   ],
