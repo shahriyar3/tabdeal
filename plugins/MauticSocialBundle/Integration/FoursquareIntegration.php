@@ -283,7 +283,7 @@ class FoursquareIntegration extends SocialIntegration
         return false;
     }
 
-    public function getFormType(): null
+    public function getFormType()
     {
         return null;
     }
