@@ -338,6 +338,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/SaraCRM"><img src="https://avatars.githubusercontent.com/u/121267071?v=4?s=100" width="100px;" alt="Sara Matos"/><br /><sub><b>Sara Matos</b></sub></a><br /><a href="https://github.com/mautic/mautic/commits?author=SaraCRM" title="Code">💻</a> <a href="https://github.com/mautic/mautic/commits?author=SaraCRM" title="Tests">⚠️</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/VishnuGurrapu"><img src="https://avatars.githubusercontent.com/u/169230642?v=4?s=100" width="100px;" alt="Vishnu Gurrapu"/><br /><sub><b>Vishnu Gurrapu</b></sub></a><br /><a href="https://github.com/mautic/mautic/commits?author=VishnuGurrapu" title="Code">💻</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/1792826181"><img src="https://avatars.githubusercontent.com/u/105675530?v=4?s=100" width="100px;" alt="Jun"/><br /><sub><b>Jun</b></sub></a><br /><a href="https://github.com/mautic/mautic/commits?author=1792826181" title="Code">💻</a></td>
+    </tr>
   </tbody>
 </table>
 
