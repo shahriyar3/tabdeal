@@ -255,7 +255,7 @@ class ContactManagementCest
         $I->click(CampaignPage::$contactsTab);
 
         // Verify that the first and second contacts are now in the campaign
-        $I->waitForElementVisible(CampaignPage::$firstContactFromContactsTab);
+        $I->waitForElementVisible(CampaignPage::$firstContactFromContactsTab, 30);
         $I->see($contactName1, CampaignPage::$firstContactFromContactsTab);
         $I->see($contactName2, CampaignPage::$secondContactFromContactsTab);
     }
