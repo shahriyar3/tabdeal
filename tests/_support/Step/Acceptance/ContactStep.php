@@ -65,8 +65,11 @@ class ContactStep extends \AcceptanceTester
      */
     public function selectContactFromList($place): void
     {
-        $I = $this;
-        $I->checkOption("//*[@id='leadTable']/tbody/tr[$place]/td[1]/div/span/input");
+        $I     = $this;
+        $xpath = "//*[@id='leadTable']/tbody/tr[$place]/td[1]/div/span/input";
+        $I->waitForElementClickable($xpath, 10);
+        $I->checkOption($xpath);
+        $I->seeCheckboxIsChecked($xpath);
     }
 
     /**
@@ -76,9 +79,13 @@ class ContactStep extends \AcceptanceTester
     {
         $I = $this;
         // Click the dropdown button for bulk actions
-        $I->click('//*[@id="leadTable"]/thead/tr/th[1]/div/div/button/i');
+        $xpathDropdownButton = '//button[@id="core-options"]';
+        $I->waitForElementClickable($xpathDropdownButton, 10);
+        $I->click($xpathDropdownButton);
         // Select the desired option from the dropdown menu
-        $I->click("//*[@id='leadTable']/thead/tr/th[1]/div/div/ul/li[$option]/a/span");
+        $xpathOption = "//ul[contains(@class, 'page-list-actions') and contains(@class, 'dropdown-menu')]/li[$option]";
+        $I->waitForElementClickable($xpathOption, 10);
+        $I->click($xpathOption);
     }
 
     /**

@@ -29,7 +29,7 @@ class ContactPage
 
     // Contact Details Page
     public static $editButton = '#toolbar > div.std-toolbar > a:nth-child(1)';
-    public static $dropDown   = '#toolbar .std-toolbar > button';
+    public static $dropDown   = 'button#core-options';
     public static $delete     = '#toolbar > div.std-toolbar.open > ul > li:nth-child(5) > a';
 
     // Contact Page
@@ -73,9 +73,12 @@ class ContactPage
     public static $searchBar   = '#list-search';
     public static $clearSearch = '#btn-filter';
 
+    // Clear all selection button
+    public static $clearAllContactsSelection = '#form-cancel';
+
     // Do Not Contact
     public static $firstContactDoNotContact  = '#leadTable > tbody > tr:nth-child(1) > td:nth-child(2) > a > div.pull-right > span';
-    public static $secondContactDoNotContact = '#leadTable > tbody > tr:nth-child(1) > td:nth-child(2) > a > div.pull-right > span';
+    public static $secondContactDoNotContact = '#leadTable > tbody > tr:nth-child(2) > td:nth-child(2) > a > div.pull-right > span';
     public static $doNotContactSaveButton    = '//*[@id="MauticSharedModal"]/div/div/div[3]/div/button[1]';
 
     /**
