@@ -1,6 +1,9 @@
 <?php declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
+use Rector\PHPUnit\PHPUnit60\Rector\ClassMethod\AddDoesNotPerformAssertionToNonAssertingTestRector;
+use Rector\PHPUnit\PHPUnit60\Rector\MethodCall\GetMockBuilderGetMockToCreateMockRector;
+use Rector\PHPUnit\PHPUnit80\Rector\MethodCall\SpecificAssertContainsRector;
 use Rector\PHPUnit\Set\PHPUnitSetList;
 
 return RectorConfig::configure()
@@ -17,9 +20,9 @@ return RectorConfig::configure()
         PHPUnitSetList::PHPUNIT_100,
     ])
     ->withRules([
-        \Rector\PHPUnit\PHPUnit80\Rector\MethodCall\SpecificAssertContainsRector::class,
-        \Rector\PHPUnit\PHPUnit60\Rector\MethodCall\GetMockBuilderGetMockToCreateMockRector::class,
+        SpecificAssertContainsRector::class,
+        GetMockBuilderGetMockToCreateMockRector::class,
     ])
     ->withSkip([
-        \Rector\PHPUnit\PHPUnit60\Rector\ClassMethod\AddDoesNotPerformAssertionToNonAssertingTestRector::class, // Adds annotation where it does not belong to.
+        AddDoesNotPerformAssertionToNonAssertingTestRector::class, // Adds annotation where it does not belong to.
     ]);
