@@ -25,7 +25,6 @@
     "mautic/core-lib": "^7.0"
   },
   "require-dev": {
-    "biozshock/phpunit-consecutive": "^1.0",
     "codeception/codeception": "^5.1",
     "codeception/module-asserts": "^3.0",
     "codeception/module-db": "^3.1",
