@@ -8,6 +8,12 @@
 ## Removed features
 - The ability to update Mautic in the browser (via user interface) has been removed. To update Mautic, use the **command line** instead.
 
+## Removed Composer dependencies
+- `symfony/yaml`
+- `symfony/security-acl`
+- `symfony/css-selector`
+- `symfony/templating`
+
 ## BC breaks in the code
 
 ### PHP
