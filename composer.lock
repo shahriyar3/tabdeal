@@ -6058,7 +6058,7 @@
             "dist": {
                 "type": "path",
                 "url": "app",
-                "reference": "946c52cc08d9a80aa175150de3978d8f21702478"
+                "reference": "54bd9d09f9ffa84662d2148266e8995dd9826591"
             },
             "require": {
                 "aws/aws-sdk-php": "~3.0",
@@ -6102,7 +6102,6 @@
                 "knplabs/knp-menu-bundle": "^3.0",
                 "matomo/device-detector": "^4.0",
                 "matthiasmullie/minify": "^1.3",
-                "noxlogic/ratelimit-bundle": "^2.0",
                 "oneup/uploader-bundle": "^5.0",
                 "php": "~8.2",
                 "php-amqplib/rabbitmq-bundle": "^2.5.1",
@@ -6610,71 +6609,6 @@
                 }
             ],
             "time": "2022-08-04T09:53:51+00:00"
-        },
-        {
-            "name": "noxlogic/ratelimit-bundle",
-            "version": "2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jaytaph/RateLimitBundle.git",
-                "reference": "91d4a0b3a8e7cd3d9a0bceadac8438c45857f04a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jaytaph/RateLimitBundle/zipball/91d4a0b3a8e7cd3d9a0bceadac8438c45857f04a",
-                "reference": "91d4a0b3a8e7cd3d9a0bceadac8438c45857f04a",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^8.0",
-                "symfony/framework-bundle": "^5.4.2|^6.1"
-            },
-            "require-dev": {
-                "doctrine/cache": "^1.5",
-                "friendsofsymfony/oauth-server-bundle": "^1.5|^2.0@dev",
-                "predis/predis": "^0.8|^1.1|^2.0",
-                "psr/cache": "^1.0|^2.0",
-                "psr/simple-cache": "^1.0|^2.0",
-                "symfony/phpunit-bridge": ">=5.4"
-            },
-            "suggest": {
-                "doctrine/doctrine-cache-bundle": "Use Doctrine Cache as a storage engine.",
-                "friendsofsymfony/oauth-server-bundle": "Throttle using OAuth access tokens.",
-                "leaseweb/memcache-bundle": "Use Memcache as a storage engine.",
-                "snc/redis-bundle": "Use Redis as a storage engine."
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "2.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Noxlogic\\RateLimitBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Joshua Thijssen",
-                    "email": "jthijssen@noxlogic.nl"
-                }
-            ],
-            "description": "This bundle provides functionality to limit calls to actions based on rate limits",
-            "keywords": [
-                "api",
-                "rest",
-                "x-rate-limit"
-            ],
-            "support": {
-                "issues": "https://github.com/jaytaph/RateLimitBundle/issues",
-                "source": "https://github.com/jaytaph/RateLimitBundle/tree/2.0.0"
-            },
-            "time": "2023-08-14T08:30:13+00:00"
         },
         {
             "name": "oneup/uploader-bundle",
