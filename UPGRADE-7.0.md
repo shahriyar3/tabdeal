@@ -17,3 +17,8 @@
 - `noxlogic/ratelimit-bundle` see https://github.com/mautic/mautic/pull/14876
 - `symfony/amqp-messenger` see https://github.com/mautic/mautic/pull/14883
 - `php-amqplib/rabbitmq-bundle` see https://github.com/mautic/mautic/pull/14883
+
+## BC breaks in the code
+
+### PHP
+- Removed `\Mautic\DashboardBundle\Dashboard\Widget::FORMAT_MYSQL` constant. Use `DateTimeHelper::FORMAT_DB_DATE_ONLY` instead.
