@@ -284,6 +284,55 @@ final class ListControllerFunctionalTest extends MauticMysqlTestCase
         self::assertSame(Response::HTTP_OK, $response['statusCode']);
     }
 
+    public function testSegmentClone(): void
+    {
+        $segment   = $this->saveSegment('Test Segment', 'testsegment');
+        $segmentId = $segment->getId();
+
+        // Number of segments before clone
+        $segmentsCountBefore = $this->em->getRepository(LeadList::class)->count([]);
+        // Go to clone segment action
+        $crawler = $this->client->request(Request::METHOD_GET, '/s/segments/clone/'.(string) $segmentId);
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        // First submit
+        $form    = $crawler->selectButton('leadlist_buttons_apply')->form();
+        $crawler = $this->client->submit($form);
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Correct Apply');
+        // Second submit
+        $form = $crawler->selectButton('leadlist_buttons_apply')->form();
+        $this->client->submit($form);
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Correct Apply');
+        // Number of segments after clone
+        $segmentsCountAfter = $this->em->getRepository(LeadList::class)->count([]);
+        // Check that just one segment was created
+        $this->assertSame($segmentsCountBefore + 1, $segmentsCountAfter);
+    }
+
+    public function testSegmentAliasCreation(): void
+    {
+        $segment   = $this->saveSegment('Test Segment Alias', 'test-segment-alias');
+        $segmentId = $segment->getId();
+
+        // Clone segment
+        $aliasFirst = $this->getAliasWhenCloneSegment($segmentId);
+        // Clone segment again
+        $aliasSecond = $this->getAliasWhenCloneSegment($segmentId);
+        // Check that aliases are not the same
+        $this->assertNotSame($aliasFirst, $aliasSecond);
+    }
+
+    private function getAliasWhenCloneSegment(int $segmentId): string
+    {
+        $crawler = $this->client->request(Request::METHOD_GET, '/s/segments/clone/'.(string) $segmentId);
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        // Save cloned segment
+        $form    = $crawler->selectButton('leadlist_buttons_apply')->form();
+        $crawler = $this->client->submit($form);
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Correct Apply');
+
+        return $crawler->filter('#leadlist_alias')->attr('value');
+    }
+
     public function testSegmentNotFoundOnAjax(): void
     {
         // Emulate invalid request parameter.
@@ -548,5 +597,28 @@ final class ListControllerFunctionalTest extends MauticMysqlTestCase
             [null, false],
             ['\b\d{4}-(10|11|12)-\d{2}\b', false, 'regexp'],
         ];
+    }
+
+    public function testRecentActivityFeedOnSegmentDetailsPage(): void
+    {
+        // Create segment
+        $segment = $this->saveSegment('Date Segment', 'ds');
+        $this->em->clear();
+
+        // Update segment
+        $crawler = $this->client->request(Request::METHOD_GET, '/s/segments/edit/'.$segment->getId());
+        $this->assertResponseIsSuccessful();
+        $form    = $crawler->selectButton('leadlist_buttons_apply')->form();
+        $form['leadlist[isPublished]']->setValue('0');
+        $this->client->submit($form);
+
+        // View segment
+        $crawler = $this->client->request(Request::METHOD_GET, '/s/segments/view/'.$segment->getId());
+        $this->assertResponseIsSuccessful();
+
+        $translator = self::getContainer()->get('translator');
+
+        $this->assertStringContainsString($translator->trans('mautic.core.recent.activity'), $this->client->getResponse()->getContent());
+        $this->assertCount(2, $crawler->filterXPath('//ul[contains(@class, "media-list-feed")]/li'));
     }
 }
