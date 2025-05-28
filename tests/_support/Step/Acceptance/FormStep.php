@@ -11,7 +11,7 @@ class FormStep extends \AcceptanceTester
         $I = $this;
         $I->waitForText('What type of form do you want to create?', 10);
         $I->wait(1); // Give the modal time to fully render
-        
+
         // Try to find and click the standalone form tile
         try {
             // First try clicking by selector
