@@ -160,7 +160,7 @@
       "@rector-code",
       "@rector-tests"
     ],
-    "npm-ci": "npm ci --prefer-offline --no-audit",
+    "npm-ci": "yarn install",
     "npx-patch-package": "npx patch-package",
     "generate-assets": "bin/console mautic:assets:generate"
   },
