@@ -18,8 +18,8 @@
     "build": "parcel build Assets/library/js/builder.js --dist-dir Assets/library/js/dist --public-url ./ --no-source-maps",
     "build-dev": "NODE_ENV=development parcel build Assets/library/js/builder.js --dist-dir Assets/library/js/dist --public-url ./ --no-optimize",
     "remove-build": "rm -rf ./Assets/library/js/dist/* && rm -rf .parcel-cache/*",
-    "rebuild": "npm run remove-build && npm run build",
-    "rebuild-dev": "npm run remove-build && npm run build-dev",
+    "rebuild": "yarn run remove-build && yarn run build",
+    "rebuild-dev": "yarn run remove-build && yarn run build-dev",
     "dev": "NODE_ENV=development parcel watch Assets/library/js/* --dist-dir Assets/library/js/dist --public-url /plugins/GrapesJsBuilderBundle/Assets/library/js/dist --hmr-hostname localhost",
     "lint": "eslint Assets/library/js/",
     "prettier": "node_modules/.bin/prettier -w Assets/library/js/",
@@ -27,7 +27,7 @@
     "start-helloWorld": "parcel Demo/helloWorld/index.html",
     "start-mautic-full": "cp -r Demo/data dist && parcel Demo/mautic/full.html",
     "start-mautic": "cp -r Demo/data dist && parcel Demo/mautic/index.html",
-    "update-mautic-preset": "rm -r node_modules/grapesjs-preset-mautic && npm install mautic/grapesjs-preset-mautic#main"
+    "update-mautic-preset": "rm -r node_modules/grapesjs-preset-mautic && yarn add mautic/grapesjs-preset-mautic#main"
   },
   "repository": {
     "type": "git",
