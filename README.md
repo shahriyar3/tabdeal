@@ -1,43 +1,45 @@
 # Mautic Tabdeal
 
-پروژه Mautic با پلاگین سفارشی و تنظیمات Docker برای استفاده از Yarn به جای NPM.
+A customized Mautic project with a custom plugin and Docker configuration using Yarn instead of NPM.
 
-## ویژگی‌ها
+## Features
 
-- **Mautic 5.x** - آخرین نسخه Mautic
-- **پلاگین CustomFormBundle** - پلاگین سفارشی برای مدیریت فرم‌ها
-- **Docker Compose** - راه‌اندازی آسان با Docker
-- **Yarn** - استفاده از Yarn به جای NPM برای مدیریت وابستگی‌های JavaScript
-- **Entity سفارشی** - ذخیره داده‌های فرم در جدول جداگانه
+- **Mautic 5.x** - Latest version of Mautic
+- **CustomFormBundle Plugin** - Custom plugin for form management
+- **Docker Compose** - Easy setup with Docker
+- **Yarn** - Using Yarn instead of NPM for JavaScript dependency management
+- **Custom Entity** - Store form data in separate database table
+- **Redis Cache** - High-performance caching
+- **MailHog** - Email testing service
 
-## پیش‌نیازها
+## Prerequisites
 
 - Docker
 - Docker Compose
 - Git
 
-## نصب و راه‌اندازی
+## Installation & Setup
 
-### 1. کلون کردن پروژه
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/your-username/mautic_tabdeal.git
 cd mautic_tabdeal
 ```
 
-### 2. تنظیمات محیطی
+### 2. Environment Configuration
 
-#### ایجاد فایل .env
+#### Create .env File
 
 ```bash
-# کپی کردن فایل نمونه
+# Copy the example file
 cp env.example .env
 
-# یا ایجاد فایل .env جدید
+# Or create a new .env file
 touch .env
 ```
 
-#### تنظیمات پیشنهادی برای .env
+#### Recommended .env Configuration
 
 ```env
 # Database Configuration
@@ -47,16 +49,18 @@ MAUTIC_DB_NAME=mautic
 MAUTIC_DB_USER=mautic
 MAUTIC_DB_PASS=mautic_password
 
-# Mautic Configuration
-MAUTIC_SECRET_KEY=your_secret_key_here
+# Mautic Core Configuration
+MAUTIC_SECRET_KEY=your_secret_key_here_change_this_in_production
 MAUTIC_LOCALE=en_US
 MAUTIC_TIMEZONE=UTC
+MAUTIC_SITE_URL=http://localhost:8080
 
-# Mail Configuration (Optional)
+# Mail Configuration (Optional - for testing use MailHog)
 MAUTIC_MAILER_HOST=mailhog
 MAUTIC_MAILER_PORT=1025
 MAUTIC_MAILER_USER=
 MAUTIC_MAILER_PASSWORD=
+MAUTIC_MAILER_ENCRYPTION=null
 
 # Cache Configuration
 MAUTIC_CACHE_ADAPTER=file
@@ -64,58 +68,83 @@ MAUTIC_CACHE_PREFIX=mautic_
 
 # Session Configuration
 MAUTIC_SESSION_NAME=mautic_session
+
+# Queue Configuration (Optional)
+MAUTIC_QUEUE_PROTOCOL=doctrine
+MAUTIC_QUEUE_HOST=localhost
+MAUTIC_QUEUE_PORT=5672
+MAUTIC_QUEUE_USER=
+MAUTIC_QUEUE_PASSWORD=
+
+# Redis Configuration (Optional - for production)
+MAUTIC_REDIS_HOST=redis
+MAUTIC_REDIS_PORT=6379
+MAUTIC_REDIS_PASSWORD=
+
+# Logging Configuration
+MAUTIC_LOG_LEVEL=error
+MAUTIC_LOG_PATH=var/logs
+
+# Security Configuration
+MAUTIC_TRUSTED_PROXIES=127.0.0.1,::1
+MAUTIC_TRUSTED_HOSTS=localhost,127.0.0.1
+
+# Development Configuration (set to false in production)
+MAUTIC_DEBUG=true
+MAUTIC_ENV=dev
 ```
 
-### 3. راه‌اندازی با Docker
+### 3. Start with Docker
 
-#### روش ساده (با Makefile)
+#### Simple Method (Using Makefile)
 
 ```bash
-# نصب و راه‌اندازی کامل
+# Complete installation and setup
 make install
 
-# یا دستورات جداگانه
+# Or individual commands
 make start
 ```
 
-#### روش دستی
+#### Manual Method
 
 ```bash
 docker compose up -d --build
 ```
 
-این دستور:
-- کانتینرهای Docker را می‌سازد
-- وابستگی‌های PHP را نصب می‌کند
-- وابستگی‌های JavaScript را با Yarn نصب می‌کند
-- فایل‌های assets را build می‌کند
-- سرویس‌ها را راه‌اندازی می‌کند
+This command:
+- Builds Docker containers
+- Installs PHP dependencies
+- Installs JavaScript dependencies with Yarn
+- Builds asset files
+- Starts all services
 
-### 4. اجرای Migration
+### 4. Run Migrations
 
 ```bash
 docker compose exec php bin/console doctrine:migrations:migrate --no-interaction
 ```
 
-### 5. دسترسی به Mautic
+### 5. Access Mautic
 
-پس از راه‌اندازی، Mautic در آدرس زیر در دسترس خواهد بود:
+After setup, Mautic will be available at:
 - **URL**: http://localhost:8080
 - **Admin Panel**: http://localhost:8080/s/login
+- **MailHog**: http://localhost:8025
 
-## پلاگین CustomFormBundle
+## CustomFormBundle Plugin
 
-### توضیحات
+### Description
 
-پلاگین CustomFormBundle یک پلاگین سفارشی است که امکان ایجاد و مدیریت فرم‌های سفارشی را فراهم می‌کند. این پلاگین شامل:
+CustomFormBundle is a custom plugin that provides the ability to create and manage custom forms. This plugin includes:
 
-- **Entity سفارشی**: `CustomFormEntry` برای ذخیره داده‌های فرم
-- **مدل سفارشی**: `CustomFormModel` برای مدیریت منطق کسب‌وکار
-- **تنظیمات Integration**: برای پیکربندی پلاگین
+- **Custom Entity**: `CustomFormEntry` for storing form data
+- **Custom Model**: `CustomFormModel` for business logic management
+- **Integration Settings**: For plugin configuration
 
-### ساختار دیتابیس
+### Database Structure
 
-#### جدول custom_form_entry
+#### custom_form_entry Table
 
 ```sql
 CREATE TABLE custom_form_entry (
@@ -129,102 +158,103 @@ CREATE TABLE custom_form_entry (
 
 #### Migration
 
-فایل migration برای ایجاد جدول:
-- **مسیر**: `app/migrations/Version20241201000000.php`
-- **توضیحات**: ایجاد جدول custom_form_entry برای پلاگین CustomFormBundle
+Migration file for table creation:
+- **Path**: `app/migrations/Version20241201000000.php`
+- **Description**: Creates custom_form_entry table for CustomFormBundle plugin
 
-### اجرای Migration
+### Run Migration
 
-برای اجرای migration در محیط Docker:
+To run migration in Docker environment:
 
 ```bash
 docker compose exec php bin/console doctrine:migrations:migrate --no-interaction
 ```
 
-### فایل‌های پلاگین
+### Plugin Files
 
 ```
 plugins/CustomFormBundle/
 ├── Config/
-│   └── config.php          # تنظیمات Doctrine برای entity
+│   └── config.php          # Doctrine configuration for entity
 ├── Entity/
-│   └── CustomFormEntry.php # Entity برای ذخیره داده‌ها
+│   └── CustomFormEntry.php # Entity for storing data
 ├── Model/
-│   └── CustomFormModel.php # مدل برای مدیریت منطق کسب‌وکار
-└── CustomFormBundle.php    # فایل اصلی پلاگین
+│   └── CustomFormModel.php # Model for business logic
+└── CustomFormBundle.php    # Main plugin file
 ```
 
-## ساختار پروژه
+## Project Structure
 
 ```
 mautic_tabdeal/
 ├── app/
-│   ├── bundles/            # Bundle های اصلی Mautic
-│   ├── migrations/         # Migration های دیتابیس
+│   ├── bundles/            # Core Mautic bundles
+│   ├── migrations/         # Database migrations
 │   └── ...
 ├── plugins/
-│   ├── CustomFormBundle/   # پلاگین سفارشی
+│   ├── CustomFormBundle/   # Custom plugin
 │   └── ...
-├── docker-compose.yml      # تنظیمات Docker Compose
-├── Dockerfile             # Dockerfile سفارشی
-├── package.json           # وابستگی‌های JavaScript (Yarn)
-├── env.example            # نمونه فایل تنظیمات محیطی
-├── Makefile               # دستورات مفید برای مدیریت پروژه
-└── README.md              # این فایل
+├── docker-compose.yaml     # Docker Compose configuration
+├── Dockerfile             # Custom Dockerfile
+├── package.json           # JavaScript dependencies (Yarn)
+├── env.example            # Environment configuration example
+├── Makefile               # Useful commands for project management
+└── README.md              # This file
 ```
 
-## تنظیمات Docker
+## Docker Configuration
 
-### سرویس‌ها
+### Services
 
-- **php**: PHP 8.1 با Mautic
-- **mysql**: MySQL 8.0 برای دیتابیس
-- **nginx**: Nginx برای وب سرور
-- **mailhog**: Mail testing service (اختیاری)
+- **mautic**: PHP 8.1 with Mautic
+- **mysql**: MySQL 8.0 for database
+- **redis**: Redis 7 for caching
+- **mailhog**: Mail testing service
 
-### پورت‌ها
+### Ports
 
 - **8080**: Mautic Web Interface
 - **3306**: MySQL Database
-- **8025**: MailHog Web Interface (اختیاری)
+- **6379**: Redis Cache
+- **8025**: MailHog Web Interface
 
-## مدیریت وابستگی‌ها
+## Dependency Management
 
-### استفاده از Makefile (پیشنهادی)
+### Using Makefile (Recommended)
 
 ```bash
-# نمایش تمام دستورات
+# Show all available commands
 make help
 
-# نصب و راه‌اندازی کامل
+# Complete installation and setup
 make install
 
 # Build assets
 make assets
 
-# اجرای migration
+# Run migrations
 make migrate
 
-# پاک کردن cache
+# Clear cache
 make clean
 
-# Backup دیتابیس
+# Database backup
 make backup
 
-# نمایش لاگ‌ها
+# View logs
 make logs
 ```
 
 ### JavaScript (Yarn)
 
 ```bash
-# نصب وابستگی‌ها
+# Install dependencies
 yarn install
 
 # Build assets
 yarn build
 
-# یا در Docker
+# Or in Docker
 docker compose exec php yarn install
 docker compose exec php yarn build
 ```
@@ -232,88 +262,107 @@ docker compose exec php yarn build
 ### PHP (Composer)
 
 ```bash
-# نصب وابستگی‌ها
+# Install dependencies
 composer install
 
-# یا در Docker
+# Or in Docker
 docker compose exec php composer install
 ```
 
-## نکات مهم
+## Important Notes
 
-### 1. حجم پروژه
+### 1. Project Size
 
-- `node_modules/` و فایل‌های build شده از Git حذف شده‌اند
-- این کار حجم پروژه را کاهش داده و سرعت clone را افزایش می‌دهد
-- فایل‌های assets در زمان build داخل Docker ایجاد می‌شوند
+- `node_modules/` and build files are excluded from Git
+- This reduces project size and increases clone speed
+- Asset files are generated during Docker build
 
-### 2. امنیت
+### 2. Security
 
-- فایل‌های حساس مانند `.env` در `.gitignore` قرار دارند
-- تنظیمات دیتابیس در `docker-compose.yml` تعریف شده‌اند
-- **مهم**: حتماً فایل `.env` را با تنظیمات امن ایجاد کنید
+- Sensitive files like `.env` are in `.gitignore`
+- Database settings are defined in `docker-compose.yml`
+- **Important**: Always create `.env` file with secure settings
 
-### 3. پلاگین‌ها
+### 3. Plugins
 
-- پلاگین CustomFormBundle به صورت پیش‌فرض نصب شده است
-- برای اضافه کردن پلاگین‌های جدید، آن‌ها را در پوشه `plugins/` قرار دهید
+- CustomFormBundle plugin is pre-installed
+- To add new plugins, place them in the `plugins/` folder
 
-### 4. بهینه‌سازی عملکرد
+### 4. Performance Optimization
 
-- از Redis برای cache استفاده کنید (در production)
-- تنظیمات PHP را برای محیط production بهینه کنید
-- از CDN برای assets استفاده کنید
+- Use Redis for caching (in production)
+- Optimize PHP settings for production environment
+- Use CDN for assets
 
-## عیب‌یابی
+## Troubleshooting
 
-### مشکلات رایج
+### Common Issues
 
-1. **خطای دسترسی به دیتابیس**
+1. **Database Connection Error**
    ```bash
    docker compose exec php bin/console doctrine:database:create
    ```
 
-2. **خطای Migration**
+2. **Migration Error**
    ```bash
    docker compose exec php bin/console doctrine:migrations:migrate --no-interaction
    ```
 
-3. **خطای Assets**
+3. **Assets Error**
    ```bash
    docker compose exec php bin/console mautic:assets:generate
    ```
 
-4. **خطای فایل .env**
+4. **Environment File Error**
    ```bash
-   # بررسی وجود فایل .env
+   # Check if .env file exists
    ls -la .env
    
-   # کپی از نمونه
-   cp .env.example .env
+   # Copy from example
+   cp env.example .env
    ```
 
-### لاگ‌ها
+### Logs
 
 ```bash
-# مشاهده لاگ‌های PHP
+# View PHP logs
 docker compose logs php
 
-# مشاهده لاگ‌های MySQL
+# View MySQL logs
 docker compose logs mysql
 
-# مشاهده لاگ‌های Nginx
-docker compose logs nginx
+# View Redis logs
+docker compose logs redis
 
-# مشاهده لاگ‌های Mautic
+# View Mautic logs
 docker compose exec php tail -f var/logs/dev.log
 ```
 
-## پیشنهادات بهبود
+## Makefile Commands
 
-### 1. اضافه کردن سرویس‌های اختیاری
+| Command | Description |
+|---------|-------------|
+| `make help` | Show all available commands |
+| `make install` | Complete installation and setup |
+| `make start` | Start services |
+| `make stop` | Stop services |
+| `make restart` | Restart services |
+| `make logs` | View logs |
+| `make clean` | Clear cache and logs |
+| `make migrate` | Run migrations |
+| `make assets` | Build assets |
+| `make test` | Run tests |
+| `make backup` | Database backup |
+| `make restore` | Database restore |
+| `make status` | Show service status |
+| `make info` | Show system information |
+
+## Improvement Suggestions
+
+### 1. Add Optional Services
 
 ```yaml
-# در docker-compose.yml
+# In docker-compose.yml
 services:
   redis:
     image: redis:alpine
@@ -327,28 +376,102 @@ services:
       - "8025:8025"
 ```
 
-### 2. تنظیمات Production
+### 2. Production Settings
 
-- استفاده از SSL/TLS
-- تنظیمات firewall
-- Backup خودکار دیتابیس
-- Monitoring و logging
+- SSL/TLS configuration
+- Firewall settings
+- Automatic database backup
+- Monitoring and logging
 
 ### 3. CI/CD Pipeline
 
-- تست خودکار
-- Build خودکار
-- Deploy خودکار
+- Automated testing
+- Automated build
+- Automated deployment
 
-## مشارکت
+### 4. Security Enhancements
 
-برای مشارکت در پروژه:
+- SSL certificates
+- Security headers
+- Rate limiting
+- Input validation
 
-1. Fork کنید
-2. Branch جدید ایجاد کنید
-3. تغییرات را commit کنید
-4. Pull Request ارسال کنید
+### 5. Performance Optimization
 
-## لایسنس
+- CDN integration
+- Image optimization
+- Database indexing
+- Caching strategies
 
-این پروژه تحت لایسنس MIT منتشر شده است.
+## Development Workflow
+
+### 1. Local Development
+
+```bash
+# Start development environment
+make install
+
+# Make changes to code
+# Test changes
+make test
+
+# Commit changes
+git add .
+git commit -m "Your commit message"
+git push
+```
+
+### 2. Adding New Features
+
+1. Create feature branch
+2. Implement feature
+3. Add tests
+4. Update documentation
+5. Create pull request
+
+### 3. Database Changes
+
+```bash
+# Create new migration
+docker compose exec php bin/console doctrine:migrations:diff
+
+# Run migrations
+make migrate
+
+# Rollback if needed
+docker compose exec php bin/console doctrine:migrations:migrate prev
+```
+
+## Contributing
+
+To contribute to the project:
+
+1. Fork the repository
+2. Create a new branch
+3. Make your changes
+4. Add tests
+5. Update documentation
+6. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License.
+
+## Support
+
+For support and questions:
+
+- Create an issue on GitHub
+- Check the troubleshooting section
+- Review Mautic documentation
+- Check Docker logs for errors
+
+## Changelog
+
+### Version 1.0.0
+- Initial release
+- CustomFormBundle plugin
+- Docker configuration
+- Yarn integration
+- Makefile for easy management
+- Comprehensive documentation
