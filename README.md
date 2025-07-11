@@ -25,7 +25,60 @@ git clone https://github.com/your-username/mautic_tabdeal.git
 cd mautic_tabdeal
 ```
 
-### 2. راه‌اندازی با Docker
+### 2. تنظیمات محیطی
+
+#### ایجاد فایل .env
+
+```bash
+# کپی کردن فایل نمونه
+cp env.example .env
+
+# یا ایجاد فایل .env جدید
+touch .env
+```
+
+#### تنظیمات پیشنهادی برای .env
+
+```env
+# Database Configuration
+MAUTIC_DB_HOST=mysql
+MAUTIC_DB_PORT=3306
+MAUTIC_DB_NAME=mautic
+MAUTIC_DB_USER=mautic
+MAUTIC_DB_PASS=mautic_password
+
+# Mautic Configuration
+MAUTIC_SECRET_KEY=your_secret_key_here
+MAUTIC_LOCALE=en_US
+MAUTIC_TIMEZONE=UTC
+
+# Mail Configuration (Optional)
+MAUTIC_MAILER_HOST=mailhog
+MAUTIC_MAILER_PORT=1025
+MAUTIC_MAILER_USER=
+MAUTIC_MAILER_PASSWORD=
+
+# Cache Configuration
+MAUTIC_CACHE_ADAPTER=file
+MAUTIC_CACHE_PREFIX=mautic_
+
+# Session Configuration
+MAUTIC_SESSION_NAME=mautic_session
+```
+
+### 3. راه‌اندازی با Docker
+
+#### روش ساده (با Makefile)
+
+```bash
+# نصب و راه‌اندازی کامل
+make install
+
+# یا دستورات جداگانه
+make start
+```
+
+#### روش دستی
 
 ```bash
 docker compose up -d --build
@@ -38,7 +91,13 @@ docker compose up -d --build
 - فایل‌های assets را build می‌کند
 - سرویس‌ها را راه‌اندازی می‌کند
 
-### 3. دسترسی به Mautic
+### 4. اجرای Migration
+
+```bash
+docker compose exec php bin/console doctrine:migrations:migrate --no-interaction
+```
+
+### 5. دسترسی به Mautic
 
 پس از راه‌اندازی، Mautic در آدرس زیر در دسترس خواهد بود:
 - **URL**: http://localhost:8080
@@ -109,6 +168,8 @@ mautic_tabdeal/
 ├── docker-compose.yml      # تنظیمات Docker Compose
 ├── Dockerfile             # Dockerfile سفارشی
 ├── package.json           # وابستگی‌های JavaScript (Yarn)
+├── env.example            # نمونه فایل تنظیمات محیطی
+├── Makefile               # دستورات مفید برای مدیریت پروژه
 └── README.md              # این فایل
 ```
 
@@ -119,13 +180,40 @@ mautic_tabdeal/
 - **php**: PHP 8.1 با Mautic
 - **mysql**: MySQL 8.0 برای دیتابیس
 - **nginx**: Nginx برای وب سرور
+- **mailhog**: Mail testing service (اختیاری)
 
 ### پورت‌ها
 
 - **8080**: Mautic Web Interface
 - **3306**: MySQL Database
+- **8025**: MailHog Web Interface (اختیاری)
 
 ## مدیریت وابستگی‌ها
+
+### استفاده از Makefile (پیشنهادی)
+
+```bash
+# نمایش تمام دستورات
+make help
+
+# نصب و راه‌اندازی کامل
+make install
+
+# Build assets
+make assets
+
+# اجرای migration
+make migrate
+
+# پاک کردن cache
+make clean
+
+# Backup دیتابیس
+make backup
+
+# نمایش لاگ‌ها
+make logs
+```
 
 ### JavaScript (Yarn)
 
@@ -163,11 +251,18 @@ docker compose exec php composer install
 
 - فایل‌های حساس مانند `.env` در `.gitignore` قرار دارند
 - تنظیمات دیتابیس در `docker-compose.yml` تعریف شده‌اند
+- **مهم**: حتماً فایل `.env` را با تنظیمات امن ایجاد کنید
 
 ### 3. پلاگین‌ها
 
 - پلاگین CustomFormBundle به صورت پیش‌فرض نصب شده است
 - برای اضافه کردن پلاگین‌های جدید، آن‌ها را در پوشه `plugins/` قرار دهید
+
+### 4. بهینه‌سازی عملکرد
+
+- از Redis برای cache استفاده کنید (در production)
+- تنظیمات PHP را برای محیط production بهینه کنید
+- از CDN برای assets استفاده کنید
 
 ## عیب‌یابی
 
@@ -188,6 +283,15 @@ docker compose exec php composer install
    docker compose exec php bin/console mautic:assets:generate
    ```
 
+4. **خطای فایل .env**
+   ```bash
+   # بررسی وجود فایل .env
+   ls -la .env
+   
+   # کپی از نمونه
+   cp .env.example .env
+   ```
+
 ### لاگ‌ها
 
 ```bash
@@ -199,7 +303,42 @@ docker compose logs mysql
 
 # مشاهده لاگ‌های Nginx
 docker compose logs nginx
+
+# مشاهده لاگ‌های Mautic
+docker compose exec php tail -f var/logs/dev.log
 ```
+
+## پیشنهادات بهبود
+
+### 1. اضافه کردن سرویس‌های اختیاری
+
+```yaml
+# در docker-compose.yml
+services:
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+  
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+```
+
+### 2. تنظیمات Production
+
+- استفاده از SSL/TLS
+- تنظیمات firewall
+- Backup خودکار دیتابیس
+- Monitoring و logging
+
+### 3. CI/CD Pipeline
+
+- تست خودکار
+- Build خودکار
+- Deploy خودکار
 
 ## مشارکت
 
