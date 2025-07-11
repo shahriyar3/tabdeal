@@ -31,8 +31,13 @@ WORKDIR /var/www/html
 
 COPY . /var/www/html/
 
-RUN yarn install
-RUN yarn build
+# نصب وابستگی‌های پلاگین و build آن
+WORKDIR /var/www/html/plugins/GrapesJsBuilderBundle
+RUN yarn install && yarn run build
+
+# نصب وابستگی‌های اصلی پروژه و build
+WORKDIR /var/www/html
+RUN yarn install && yarn build
 
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html

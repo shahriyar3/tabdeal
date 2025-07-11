@@ -1,4 +1,4 @@
-# mautic_tabdeal
+# Mautic_Tabdeal
 
 **This project is based on the official [Mautic](https://github.com/mautic/mautic) repository.**
 
@@ -17,9 +17,6 @@ This repository is a customized version of Mautic with the following additions:
 
 ### Prerequisites
 - Docker & Docker Compose
-- Node.js v20+ and Yarn (for local development)
-- PHP 8.3+ (if running outside Docker)
-- Composer (if running outside Docker)
 
 ### Installation Steps
 1. Clone the repository:
@@ -27,32 +24,15 @@ This repository is a customized version of Mautic with the following additions:
    git clone https://github.com/shahriyar3/tabdeal.git
    cd tabdeal
    ```
-2. Install Node.js dependencies using Yarn:
+2. Build and start the project (all dependencies and builds are handled inside Docker):
    ```bash
-   cd plugins/GrapesJsBuilderBundle
-   yarn install
-   cd ../..
-   yarn install
-   ```
-3. Build frontend assets:
-   ```bash
-   yarn build
-   ```
-4. Copy environment files (if needed):
-   ```bash
-   cp .env.example .env
+   docker compose up -d --build
    ```
 
 ### Configuration
 - Docker: Main configuration is in `docker-compose.yaml` and `Dockerfile`.
 - Database & Services: MySQL and Redis are included as services in `docker-compose.yaml`.
 - Environment Variables: Set your environment variables in the `.env` file as needed.
-
-### Running the Project
-To build and start the project, run:
-```bash
-docker compose up -d --build
-```
 
 ---
 
