@@ -1,4 +1,4 @@
-FROM php:8.3-fpm
+FROM focker.ir/php:8.3-fpm
 
 RUN apt-get update && apt-get install -y \
     git \
@@ -19,10 +19,9 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip imap
 
-# Install yarn
 RUN npm install -g yarn
 
-RUN yarn config set registry https://registry.npmjs.org/
+RUN yarn config set registry https://registry.npmmirror.com
 
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -31,11 +30,9 @@ WORKDIR /var/www/html
 
 COPY . /var/www/html/
 
-# نصب وابستگی‌های پلاگین و build آن
 WORKDIR /var/www/html/plugins/GrapesJsBuilderBundle
 RUN yarn install && yarn run build
 
-# نصب وابستگی‌های اصلی پروژه و build
 WORKDIR /var/www/html
 RUN yarn install && yarn build
 
