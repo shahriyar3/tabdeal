@@ -72,6 +72,8 @@
 /bundles
 /node_modules
 /plugins/*/node_modules/
+node_modules
+plugins/*/node_modules/
 /build/coverage
 /build/packaging
 /build/packages/*
