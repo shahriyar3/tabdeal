@@ -32,11 +32,8 @@ cd mautic_tabdeal
 #### Create .env File
 
 ```bash
-# Copy the example file
 cp env.example .env
 
-# Or create a new .env file
-touch .env
 ```
 
 #### Recommended .env Configuration
@@ -322,21 +319,7 @@ docker compose exec php composer install
    cp env.example .env
    ```
 
-### Logs
 
-```bash
-# View PHP logs
-docker compose logs php
-
-# View MySQL logs
-docker compose logs mysql
-
-# View Redis logs
-docker compose logs redis
-
-# View Mautic logs
-docker compose exec php tail -f var/logs/dev.log
-```
 
 ## Makefile Commands
 
@@ -357,121 +340,3 @@ docker compose exec php tail -f var/logs/dev.log
 | `make status` | Show service status |
 | `make info` | Show system information |
 
-## Improvement Suggestions
-
-### 1. Add Optional Services
-
-```yaml
-# In docker-compose.yml
-services:
-  redis:
-    image: redis:alpine
-    ports:
-      - "6379:6379"
-  
-  mailhog:
-    image: mailhog/mailhog
-    ports:
-      - "1025:1025"
-      - "8025:8025"
-```
-
-### 2. Production Settings
-
-- SSL/TLS configuration
-- Firewall settings
-- Automatic database backup
-- Monitoring and logging
-
-### 3. CI/CD Pipeline
-
-- Automated testing
-- Automated build
-- Automated deployment
-
-### 4. Security Enhancements
-
-- SSL certificates
-- Security headers
-- Rate limiting
-- Input validation
-
-### 5. Performance Optimization
-
-- CDN integration
-- Image optimization
-- Database indexing
-- Caching strategies
-
-## Development Workflow
-
-### 1. Local Development
-
-```bash
-# Start development environment
-make install
-
-# Make changes to code
-# Test changes
-make test
-
-# Commit changes
-git add .
-git commit -m "Your commit message"
-git push
-```
-
-### 2. Adding New Features
-
-1. Create feature branch
-2. Implement feature
-3. Add tests
-4. Update documentation
-5. Create pull request
-
-### 3. Database Changes
-
-```bash
-# Create new migration
-docker compose exec php bin/console doctrine:migrations:diff
-
-# Run migrations
-make migrate
-
-# Rollback if needed
-docker compose exec php bin/console doctrine:migrations:migrate prev
-```
-
-## Contributing
-
-To contribute to the project:
-
-1. Fork the repository
-2. Create a new branch
-3. Make your changes
-4. Add tests
-5. Update documentation
-6. Submit a pull request
-
-## License
-
-This project is licensed under the MIT License.
-
-## Support
-
-For support and questions:
-
-- Create an issue on GitHub
-- Check the troubleshooting section
-- Review Mautic documentation
-- Check Docker logs for errors
-
-## Changelog
-
-### Version 1.0.0
-- Initial release
-- CustomFormBundle plugin
-- Docker configuration
-- Yarn integration
-- Makefile for easy management
-- Comprehensive documentation
