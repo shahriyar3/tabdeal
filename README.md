@@ -9,8 +9,6 @@ A customized Mautic project with a custom plugin and Docker configuration using 
 - **Docker Compose** - Easy setup with Docker
 - **Yarn** - Using Yarn instead of NPM for JavaScript dependency management
 - **Custom Entity** - Store form data in separate database table
-- **Redis Cache** - High-performance caching
-- **MailHog** - Email testing service
 
 ## Prerequisites
 
@@ -23,8 +21,8 @@ A customized Mautic project with a custom plugin and Docker configuration using 
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/mautic_tabdeal.git
-cd mautic_tabdeal
+git clone https://github.com/your-username/tabdeal.git
+cd tabdeal
 ```
 
 ### 2. Environment Configuration
@@ -46,49 +44,14 @@ MAUTIC_DB_NAME=mautic
 MAUTIC_DB_USER=mautic
 MAUTIC_DB_PASS=mautic_password
 
-# Mautic Core Configuration
-MAUTIC_SECRET_KEY=your_secret_key_here_change_this_in_production
-MAUTIC_LOCALE=en_US
-MAUTIC_TIMEZONE=UTC
-MAUTIC_SITE_URL=http://localhost:8080
-
-# Mail Configuration (Optional - for testing use MailHog)
-MAUTIC_MAILER_HOST=mailhog
-MAUTIC_MAILER_PORT=1025
-MAUTIC_MAILER_USER=
-MAUTIC_MAILER_PASSWORD=
-MAUTIC_MAILER_ENCRYPTION=null
-
 # Cache Configuration
 MAUTIC_CACHE_ADAPTER=file
 MAUTIC_CACHE_PREFIX=mautic_
-
-# Session Configuration
-MAUTIC_SESSION_NAME=mautic_session
-
-# Queue Configuration (Optional)
-MAUTIC_QUEUE_PROTOCOL=doctrine
-MAUTIC_QUEUE_HOST=localhost
-MAUTIC_QUEUE_PORT=5672
-MAUTIC_QUEUE_USER=
-MAUTIC_QUEUE_PASSWORD=
-
-# Redis Configuration (Optional - for production)
-MAUTIC_REDIS_HOST=redis
-MAUTIC_REDIS_PORT=6379
-MAUTIC_REDIS_PASSWORD=
 
 # Logging Configuration
 MAUTIC_LOG_LEVEL=error
 MAUTIC_LOG_PATH=var/logs
 
-# Security Configuration
-MAUTIC_TRUSTED_PROXIES=127.0.0.1,::1
-MAUTIC_TRUSTED_HOSTS=localhost,127.0.0.1
-
-# Development Configuration (set to false in production)
-MAUTIC_DEBUG=true
-MAUTIC_ENV=dev
 ```
 
 ### 3. Start with Docker
@@ -206,14 +169,12 @@ mautic_tabdeal/
 - **mautic**: PHP 8.1 with Mautic
 - **mysql**: MySQL 8.0 for database
 - **redis**: Redis 7 for caching
-- **mailhog**: Mail testing service
 
 ### Ports
 
 - **8080**: Mautic Web Interface
 - **3306**: MySQL Database
 - **6379**: Redis Cache
-- **8025**: MailHog Web Interface
 
 ## Dependency Management
 
@@ -284,12 +245,6 @@ docker compose exec php composer install
 
 - CustomFormBundle plugin is pre-installed
 - To add new plugins, place them in the `plugins/` folder
-
-### 4. Performance Optimization
-
-- Use Redis for caching (in production)
-- Optimize PHP settings for production environment
-- Use CDN for assets
 
 ## Troubleshooting
 
