@@ -109,6 +109,7 @@ plugins/*/node_modules/
 /media/js/jquery.min.js
 
 /plugins/*
+!/plugins/CustomFormBundle
 !/plugins/GrapesJsBuilderBundle
 !/plugins/MauticClearbitBundle
 !/plugins/MauticCloudStorageBundle
