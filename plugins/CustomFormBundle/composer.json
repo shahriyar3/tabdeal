@@ -1,0 +1,16 @@
+{
+    "name": "mautic/plugin-customform",
+    "description": "Custom Form Plugin for Mautic",
+    "type": "mautic-plugin",
+    "require": {
+        "php": ">=8.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "MauticPlugin\\CustomFormBundle\\": ""
+        }
+    },
+    "extra": {
+        "install-directory-name": "CustomFormBundle"
+    }
+} 
