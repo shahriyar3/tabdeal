@@ -31,7 +31,8 @@ return [
                 'class'     => \MauticPlugin\CustomFormBundle\Controller\CustomFormController::class,
                 'arguments' => [
                     'mautic.helper.integration',
-                    'mautic.customform.form.type.customform'
+                    'mautic.customform.form.type.customform',
+                    'mautic.customform.model.customform'
                 ]
             ]
         ],
@@ -39,7 +40,8 @@ return [
             'mautic.customform.model.customform' => [
                 'class'     => \MauticPlugin\CustomFormBundle\Model\CustomFormModel::class,
                 'arguments' => [
-                    'mautic.helper.integration'
+                    'mautic.helper.integration',
+                    'doctrine.orm.entity_manager'
                 ]
             ]
         ]
