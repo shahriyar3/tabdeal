@@ -5,6 +5,7 @@ namespace MauticPlugin\CustomFormBundle\Controller;
 use Mautic\CoreBundle\Controller\CommonController;
 use Mautic\CoreBundle\Helper\IntegrationHelper;
 use MauticPlugin\CustomFormBundle\Form\Type\CustomFormType;
+use MauticPlugin\CustomFormBundle\Model\CustomFormModel;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -12,11 +13,13 @@ class CustomFormController extends CommonController
 {
     private $integrationHelper;
     private $formType;
+    private $customFormModel;
 
-    public function __construct(IntegrationHelper $integrationHelper, CustomFormType $formType)
+    public function __construct(IntegrationHelper $integrationHelper, CustomFormType $formType, CustomFormModel $customFormModel)
     {
         $this->integrationHelper = $integrationHelper;
         $this->formType = $formType;
+        $this->customFormModel = $customFormModel;
     }
 
     public function indexAction(Request $request)
@@ -49,9 +52,8 @@ class CustomFormController extends CommonController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            
+            $this->customFormModel->saveData($data);
             $this->saveData($data);
-            
             $this->addFlash('mautic.core.notice.updated', [
                 '%name%' => 'Custom Form Settings'
             ]);
